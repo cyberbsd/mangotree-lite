@@ -1,4 +1,7 @@
 node_modules/
 .env
 profile/
-data/
+data/*
+!data/menu.json
+!data/reminders-sent.json
+site/

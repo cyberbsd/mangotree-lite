@@ -11,7 +11,7 @@ function alreadyOrdered(slot) {
 }
 
 /** Decide which reminders are due now (idempotent: each reminder fires once per slot/date). */
-export async function checkReminders({ now = Date.now(), uiUrl = `http://localhost:${env.port}` } = {}) {
+export async function checkReminders({ now = Date.now(), uiUrl = process.env.UI_URL || `http://localhost:${env.port}` } = {}) {
   const menu = loadMenu();
   if (!menu) return [];
   const sent = readJson('reminders-sent.json', {});

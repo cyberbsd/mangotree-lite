@@ -33,6 +33,7 @@
   dialog textarea { width:100%; height:120px; font:13px/1.4 ui-monospace,monospace; background:var(--chip); color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:8px }
   .log { font:12px/1.4 ui-monospace,monospace; white-space:pre-wrap; color:var(--muted); max-height:160px; overflow:auto }
   .empty { color:var(--muted); padding:24px; text-align:center }
+  body.static #dlg-go, body.static #dlg-auto, body.static #dlg-rec, body.static label:has(#dlg-auto), body.static label:has(#dlg-rec) { display:none }
 </style>
 </head>
 <body>
@@ -69,8 +70,18 @@ const fmt = (iso) => iso ? new Date(iso).toLocaleString('zh-TW', { timeZone:'Asi
 const fmtT = (iso) => iso ? new Date(iso).toLocaleTimeString('zh-TW', { timeZone:'Asia/Taipei', hour:'2-digit', minute:'2-digit', hour12:false }) : '?';
 const STATUS = { open:'可訂', upcoming:'未開', closed:'已截止', unknown:'' };
 
+// STATIC mode (GitHub Pages): no local server → read ./menu.json, keep favorites/orders in this browser.
+let STATIC = false;
+const LS = { get: (k, d) => { try { return JSON.parse(localStorage.getItem('mt.' + k)) ?? d; } catch { return d; } }, set: (k, v) => { try { localStorage.setItem('mt.' + k, JSON.stringify(v)); } catch {} } };
+function slotStatus(s, now = Date.now()) { const f = s.window.from && Date.parse(s.window.from), u = s.window.until && Date.parse(s.window.until); if (!f || !u) return 'unknown'; return now < f ? 'upcoming' : now <= u ? 'open' : 'closed'; }
+async function loadStatic() {
+  const [menu, config] = await Promise.all([fetch('./menu.json').then(r => r.json()), fetch('./config.json').then(r => r.json()).catch(() => ({ reminders: { meals: ['lunch'], minutesBeforeClose: 60 } }))]);
+  const slots = Object.values(menu.slots).map(s => ({ ...s, status: slotStatus(s) })).sort((a, b) => (a.date || '').localeCompare(b.date || '') || a.meal.localeCompare(b.meal));
+  return { ready: true, scrapedAt: menu.scrapedAt, area: menu.area, slots, favorites: LS.get('favorites', []), orders: LS.get('orders', []).slice(-20).reverse(), config: config.reminders };
+}
 async function load() {
-  DATA = await (await fetch('/api/menu')).json();
+  try { DATA = await (await fetch('/api/menu')).json(); }
+  catch { STATIC = true; DATA = await loadStatic(); document.body.classList.add('static'); }
   if (!DATA.ready) { $('#meta').textContent = '第一次抓菜單中（約 1–2 分鐘）…'; setTimeout(load, 15000); return; }
   $('#meta').textContent = `菜單更新 ${fmt(DATA.scrapedAt)} · 提醒：${DATA.config.meals.join(',')} 開放時 + 截止前 ${DATA.config.minutesBeforeClose} 分`;
   const want = location.hash.slice(1);
@@ -91,10 +102,15 @@ function render() {
   if (favs.length) html += `<div class="card fav"><div class="vendor">⭐ 常點（一鍵再來）</div><div class="items" style="display:block">${favs.map(({ v, it }) => itemRow(v, it, true)).join('')}</div></div>`;
   html += s.vendors.map(v => `<div class="card" data-v="${v.id}"><div class="vendor"><span>${v.name} <small>${v.priceRange || ''}${v.quantity != null ? ' · 剩 ' + v.quantity : ''}</small></span><span>${v.items.length} 項 ▾</span></div><div class="items">${v.items.map(it => itemRow(v, it)).join('') || '<div class="sub">（無法讀取品項）</div>'}</div></div>`).join('');
   if (DATA.orders.length) html += `<div class="card"><div class="vendor">最近訂單</div>${DATA.orders.slice(0, 8).map(o => `<div class="sub">${fmt(o.at)} · ${o.date || ''} ${o.itemName || ''} ×${o.qty || 1} ${o.submitted ? '✅' : '⏳未確認'}</div>`).join('')}</div>`;
+  const wasOpen = new Set([...$('#main').querySelectorAll('.card.open[data-v]')].map(c => c.dataset.v));
   $('#main').innerHTML = html;
+  $('#main').querySelectorAll('.card[data-v]').forEach(c => wasOpen.has(c.dataset.v) && c.classList.add('open'));
   $('#main').querySelectorAll('.card .vendor').forEach(h => h.onclick = () => h.parentElement.classList.toggle('open'));
   $('#main').querySelectorAll('[data-order]').forEach(b => b.onclick = (e) => { e.stopPropagation(); openDialog(JSON.parse(b.dataset.order)); });
-  $('#main').querySelectorAll('[data-fav]').forEach(b => b.onclick = async (e) => { e.stopPropagation(); DATA.favorites = await (await fetch('/api/favorites', { method:'POST', headers:{ 'content-type':'application/json' }, body: b.dataset.fav })).json(); render(); });
+  $('#main').querySelectorAll('[data-fav]').forEach(b => b.onclick = async (e) => { e.stopPropagation();
+    if (STATIC) { const f = JSON.parse(b.dataset.fav); const i = DATA.favorites.findIndex(x => x.vendorId === f.vendorId && x.itemName === f.itemName); if (i >= 0) DATA.favorites.splice(i, 1); else DATA.favorites.unshift(f); LS.set('favorites', DATA.favorites); }
+    else DATA.favorites = await (await fetch('/api/favorites', { method:'POST', headers:{ 'content-type':'application/json' }, body: b.dataset.fav })).json();
+    render(); });
 }
 function itemRow(v, it, inFav = false) {
   const o = JSON.stringify({ vendorId: v.id, vendorName: v.name, vendorUrl: v.url, itemId: it.id, itemName: it.name, price: it.price });
@@ -112,7 +128,11 @@ $('#dlg-qty').oninput = () => sel && openDialog(sel);
 $('#dlg-close').onclick = () => $('#dlg').close();
 $('#dlg-open').onclick = () => window.open(sel.vendorUrl, '_blank');
 $('#dlg-copy').onclick = async () => { await navigator.clipboard.writeText($('#dlg-prompt').value); $('#dlg-log').textContent = '已複製，貼到 Chrome 的 Claude 側欄即可。'; };
-$('#dlg-done').onclick = async () => { await fetch('/api/orders/manual', { method:'POST', headers:{ 'content-type':'application/json' }, body: JSON.stringify({ slotKey: current.key, date: current.date, vendorUrl: sel.vendorUrl, itemName: sel.itemName, qty: +$('#dlg-qty').value }) }); $('#dlg').close(); load(); };
+$('#dlg-done').onclick = async () => {
+  const o = { at: new Date().toISOString(), submitted: true, manual: true, slotKey: current.key, date: current.date, vendorUrl: sel.vendorUrl, itemName: sel.itemName, qty: +$('#dlg-qty').value };
+  if (STATIC) { const os = LS.get('orders', []); os.push(o); LS.set('orders', os.slice(-50)); }
+  else await fetch('/api/orders/manual', { method:'POST', headers:{ 'content-type':'application/json' }, body: JSON.stringify(o) });
+  $('#dlg').close(); load(); };
 $('#dlg-go').onclick = async () => {
   $('#dlg-log').textContent = '啟動瀏覽器、登入、加入購物車中…';
   const r = await (await fetch('/api/order', { method:'POST', headers:{ 'content-type':'application/json' }, body: JSON.stringify({ vendorUrl: sel.vendorUrl, itemName: sel.itemName, qty: +$('#dlg-qty').value, autoSubmit: $('#dlg-auto').checked, record: $('#dlg-rec').checked, slotKey: current.key, date: current.date }) })).json();

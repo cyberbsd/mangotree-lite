@@ -1,0 +1,70 @@
+# Runs on GitHub: scrape the 工業東一區 menu, send reminders, publish the static page to GitHub Pages.
+# Secrets (Settings → Secrets → Actions): NTFY_TOPIC and/or TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID.
+name: menu
+
+on:
+  schedule:
+    # Every 30 min, 06:00–23:30 Taiwan time (UTC+8), all days (the store only has weekday menus; idle runs are cheap).
+    - cron: '0,30 22-23 * * *'
+    - cron: '0,30 0-15 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: menu
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Scrape menu
+        env:
+          MT_HEADLESS: 'true'
+        run: node src/cli.js scrape
+      - name: Reminders
+        env:
+          MT_HEADLESS: 'true'
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          UI_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+        run: node src/cli.js remind
+      - name: Commit menu + reminder state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/menu.json data/reminders-sent.json
+          git diff --cached --quiet || git commit -m "data: menu $(date -u +%FT%TZ)"
+          git push
+      - name: Build static site
+        run: |
+          mkdir -p site
+          cp public/index.html site/index.html
+          cp data/menu.json site/menu.json
+          cp config.json site/config.json
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: scrape
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

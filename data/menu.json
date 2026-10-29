@@ -1,5 +1,5 @@
 {
- "scrapedAt": "2026-10-29T15:08:27.510Z",
+ "scrapedAt": "2026-10-29T15:51:55.361Z",
  "area": {
   "slug": "gongye-e-1",
   "name": "工業東一區"
@@ -4086,7 +4086,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 80,
+     "quantity": 79,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": -1,
@@ -4097,7 +4097,7 @@
        "name": "原味芋泥球  3入/盒 $65",
        "price": 65,
        "priceLabel": "NT$65",
-       "qty": 38
+       "qty": 37
       },
       {
        "id": "6adb479ca7045b000122a927",
@@ -4124,7 +4124,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 74,
+     "quantity": 72,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": -1,
@@ -4135,7 +4135,7 @@
        "name": "水果小確幸(2樣、圓盒) $40",
        "price": 45,
        "priceLabel": "NT$45",
-       "qty": 46
+       "qty": 44
       },
       {
        "id": "6adb63c00ed8420001d8c962",
@@ -4154,7 +4154,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 123,
+     "quantity": 121,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": -1,
@@ -4165,7 +4165,7 @@
        "name": "豆漿(非基改) $20 / 有糖",
        "price": 20,
        "priceLabel": "NT$20",
-       "qty": 28
+       "qty": 27
       },
       {
        "id": "6adb63b30ed8420001d8c868",
@@ -4189,7 +4189,7 @@
        "name": "黑芝麻豆漿 $25 / 低糖",
        "price": 25,
        "priceLabel": "NT$25",
-       "qty": 12
+       "qty": 11
       },
       {
        "id": "6adb63b30ed8420001d8c876",
@@ -5042,7 +5042,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 380,
+     "quantity": 379,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": 0,
@@ -5077,7 +5077,7 @@
        "name": "照燒排骨飯 $90",
        "price": 90,
        "priceLabel": "NT$90",
-       "qty": 30
+       "qty": 29
       },
       {
        "id": "6adb1ad0a7045b00011f3ed1",
@@ -9196,7 +9196,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 335,
+     "quantity": 334,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T05:00:00.000Z",
      "maxOrderQty": 0,
@@ -9223,7 +9223,7 @@
        "name": "韭菜鍋貼10個 $70",
        "price": 70,
        "priceLabel": "NT$70",
-       "qty": 25
+       "qty": 24
       },
       {
        "id": "6adb2db5a7045b00012008e3",

@@ -36,21 +36,32 @@
 
   try {
     if (isProduct && pending.stage === 'add') {
-      banner(`加入購物車：${pending.itemName} ×${pending.qty || 1} …`);
+      const mine = (l) => !l.done && l.vendorUrl.split('?')[0] === here.split('?')[0];
       if (!(await call('user', {}, 15000))) {
-        banner('尚未登入 mangotree.tw，3 秒後帶你去登入；登入後再按一次「訂」。', '#c0392b'); await logTo('not logged in'); await S.remove('pending');
+        banner('尚未登入 mangotree.tw，3 秒後帶你去登入；登入後再按一次「一次結帳」。', '#c0392b'); await logTo('not logged in'); await S.remove('pending');
         setTimeout(() => { location.href = 'https://www.mangotree.tw/users/sign_in'; }, 3000); return;
       }
-      const r = await call('add', { itemName: pending.itemName, qty: pending.qty || 1 });
-      await logTo('added: ' + JSON.stringify(r));
-      await S.set({ pending: { ...(await get('pending')), stage: 'checkout' } });
-      banner('已加入購物車，前往結帳…', '#2e8b57');
+      for (const line of pending.items.filter(mine)) {
+        const p = await get('pending'); if (!p) return;
+        banner(`加入購物車（${p.done + 1}/${p.items.length}）：${line.itemName} ×${line.qty || 1} …`);
+        const r = await call('add', { itemName: line.itemName, qty: line.qty || 1 });
+        const idx = p.items.findIndex((l) => !l.done && l.itemName === line.itemName && l.vendorUrl === line.vendorUrl);
+        if (idx >= 0) p.items[idx].done = true;
+        p.done = p.items.filter((l) => l.done).length; p.log.push(`${new Date().toLocaleTimeString()} added ${line.itemName}: ${JSON.stringify(r).slice(0, 200)}`);
+        await S.set({ pending: p });
+        await new Promise((r) => setTimeout(r, 1200));
+      }
+      const p = await get('pending'); if (!p) return;
+      const next = p.items.find((l) => !l.done);
+      if (next) { banner(`前往 ${next.vendorName} …`, '#2e8b57'); location.href = next.vendorUrl.split('?')[0] + '?mtl=' + p.id; return; }
+      await S.set({ pending: { ...p, stage: 'checkout' } });
+      banner('全部加入購物車，前往結帳…', '#2e8b57');
       location.href = 'https://www.mangotree.tw/checkout';
     } else if (isCheckout && pending.stage === 'checkout') {
       banner(settings.autoSubmit ? '結帳中，自動送出…' : '結帳頁已備好，請按最後的送出按鈕。');
       const r = await call('checkout', { note: settings.note, autoSubmit: settings.autoSubmit }, 45000);
       await logTo('checkout: ' + JSON.stringify(r));
-      const order = { slotKey: pending.slotKey, date: pending.date, vendorName: pending.vendorName, itemName: pending.itemName, qty: pending.qty || 1, submitted: r.submitted, auto: settings.autoSubmit };
+      const order = { slotKey: pending.slotKey, date: pending.date, items: pending.items.map(({ vendorName, itemName, qty }) => ({ vendorName, itemName, qty: qty || 1 })), submitted: r.submitted, auto: settings.autoSubmit };
       if (r.submitted) { await S.remove('pending'); chrome.runtime.sendMessage({ type: 'ordered', order }); banner('已送出訂單 ✅（請到會員中心確認）', '#2e8b57'); }
       else {
         // Watch for the confirmation page after the human presses submit.

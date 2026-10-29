@@ -86,12 +86,15 @@ function notify(id, title, message) {
 chrome.notifications.onClicked.addListener((id) => { chrome.action.openPopup?.().catch(() => chrome.tabs.create({ url: chrome.runtime.getURL('popup.html') })); chrome.notifications.clear(id); });
 
 // ---------- one-click order ----------
-// popup → bg: {type:'order', vendorUrl, itemName, itemId, qty, slotKey, date}
-// bg stores a pending order and opens the product page; content.js picks it up from storage.
+// popup → bg: {type:'order', items:[{vendorUrl, vendorName, itemName, qty}], slotKey, date}
+// bg stores the pending basket and opens the first vendor page; content.js adds every line for that
+// vendor, then moves on to the next vendor, then /checkout.
 async function startOrder(o) {
-  const pending = { ...o, id: `${Date.now()}`, stage: 'add', startedAt: Date.now(), log: [] };
+  const items = (o.items || []).map((l) => ({ ...l, done: false }));
+  if (!items.length) throw new Error('empty basket');
+  const pending = { id: `${Date.now()}`, items, slotKey: o.slotKey, date: o.date, stage: 'add', done: 0, startedAt: Date.now(), log: [] };
   await S.set({ pending });
-  const url = o.vendorUrl + (o.vendorUrl.includes('?') ? '&' : '?') + 'mtl=' + pending.id;
+  const url = items[0].vendorUrl + (items[0].vendorUrl.includes('?') ? '&' : '?') + 'mtl=' + pending.id;
   const tab = await chrome.tabs.create({ url, active: true });
   await S.set({ pending: { ...pending, tabId: tab.id } });
   return pending.id;
@@ -104,7 +107,7 @@ chrome.runtime.onMessage.addListener((msg, sender, reply) => {
     else if (msg.type === 'remind') { await checkReminders(); reply(true); }
     else if (msg.type === 'ordered') {           // from content.js when checkout is done
       const orders = await get('orders', []); orders.push({ at: new Date().toISOString(), ...msg.order }); await S.set({ orders: orders.slice(-100) });
-      notify('ordered-' + Date.now(), '✅ 已下單', `${msg.order.itemName} ×${msg.order.qty || 1}`); reply(true);
+      notify('ordered-' + Date.now(), '✅ 已下單', (msg.order.items || []).map((l) => `${l.itemName}×${l.qty}`).join('、')); reply(true);
     }
     else reply(null);
   })().catch((e) => reply({ error: e.message }));

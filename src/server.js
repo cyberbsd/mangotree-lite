@@ -34,9 +34,9 @@ app.post('/api/favorites', (req, res) => {
 
 /** Order via Playwright (stored credentials). Opens a visible browser on this machine. */
 app.post('/api/order', async (req, res) => {
-  const { vendorUrl, itemName, qty = 1, autoSubmit = false, record = false, slotKey, date } = req.body || {};
-  if (!vendorUrl || !itemName) return res.status(400).json({ ok: false, error: 'vendorUrl and itemName required' });
-  res.json(await placeOrder({ vendorUrl, itemName, qty, autoSubmit, record, slotKey, date }));
+  const { items, vendorUrl, itemName, qty = 1, autoSubmit = false, record = false, slotKey, date } = req.body || {};
+  if (!(items && items.length) && !(vendorUrl && itemName)) return res.status(400).json({ ok: false, error: 'items[] or vendorUrl+itemName required' });
+  res.json(await placeOrder({ items, vendorUrl, itemName, qty, autoSubmit, record, slotKey, date }));
 });
 
 /** Mark an order you placed by hand / via Claude in Chrome, so reminders go quiet. */

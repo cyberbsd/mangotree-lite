@@ -99,3 +99,11 @@ therefore matched by vendor **name** + dish name with the trailing price ignored
 still matches next week's "精緻燒肉飯 $90". When a new week's menu appears, the reminder job sends one
 notice listing which days your favorites are on; `data/state.json` (committed by the workflow) remembers
 the last week seen.
+
+## Basket (multiple items per order)
+
+Tap **＋** on any dish (any vendor, same day) to put it in the 🧺 basket; **−** removes. **一次結帳** adds
+every line to the mangotree.tw cart vendor by vendor, then opens checkout once. **存成常點組合** saves the
+whole basket under a name (e.g. 平常午餐); next week one tap on **放入籃子** refills it, and lines that are
+missing that day are flagged instead of silently dropped. The local server's `/api/order` takes the same
+`items[]` shape for the Playwright path.

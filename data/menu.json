@@ -1,5 +1,5 @@
 {
- "scrapedAt": "2026-10-29T15:51:55.361Z",
+ "scrapedAt": "2026-10-29T20:00:04.973Z",
  "area": {
   "slug": "gongye-e-1",
   "name": "工業東一區"
@@ -4086,7 +4086,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 79,
+     "quantity": 74,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": -1,
@@ -4105,7 +4105,7 @@
        "name": "乳酪芋泥球 3入/盒 $82",
        "price": 82,
        "priceLabel": "NT$82",
-       "qty": 20
+       "qty": 17
       },
       {
        "id": "6adb479ca7045b000122a928",
@@ -4113,7 +4113,7 @@
        "name": "綜合(原味 乳酪 黃金奇異果各一) $75",
        "price": 75,
        "priceLabel": "NT$75",
-       "qty": 22
+       "qty": 20
       }
      ]
     },
@@ -4124,7 +4124,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 72,
+     "quantity": 64,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": -1,
@@ -4135,7 +4135,7 @@
        "name": "水果小確幸(2樣、圓盒) $40",
        "price": 45,
        "priceLabel": "NT$45",
-       "qty": 44
+       "qty": 39
       },
       {
        "id": "6adb63c00ed8420001d8c962",
@@ -4143,7 +4143,7 @@
        "name": "清爽獨饗盒(3樣、方盒) $65",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 28
+       "qty": 25
       }
      ]
     },
@@ -4154,7 +4154,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 121,
+     "quantity": 118,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": -1,
@@ -4173,7 +4173,7 @@
        "name": "豆漿(非基改) $20 / 無糖",
        "price": 20,
        "priceLabel": "NT$20",
-       "qty": 51
+       "qty": 49
       },
       {
        "id": "6adb63b30ed8420001d8c86a",
@@ -4189,7 +4189,7 @@
        "name": "黑芝麻豆漿 $25 / 低糖",
        "price": 25,
        "priceLabel": "NT$25",
-       "qty": 11
+       "qty": 10
       },
       {
        "id": "6adb63b30ed8420001d8c876",
@@ -4216,7 +4216,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 89,
+     "quantity": 86,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": -1,
@@ -4235,7 +4235,7 @@
        "name": "鳳梨火龍果綜合果蔬汁 300ml $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 17
+       "qty": 16
       },
       {
        "id": "6adb42eba7045b000122a48c",
@@ -4251,7 +4251,7 @@
        "name": "椪柑百香綜合果汁 300ml $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 18
+       "qty": 16
       },
       {
        "id": "6adb42eba7045b000122a48e",
@@ -4270,7 +4270,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 159,
+     "quantity": 157,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": 0,
@@ -4305,7 +4305,7 @@
        "name": "飯食 / 腿庫飯便當 $130",
        "price": 130,
        "priceLabel": "NT$130",
-       "qty": 14
+       "qty": 13
       },
       {
        "id": "6adb1ad6a7045b00011f3fa5",
@@ -4321,7 +4321,7 @@
        "name": "湯品 / 蒜頭雞湯 $110",
        "price": 110,
        "priceLabel": "NT$110",
-       "qty": 5
+       "qty": 4
       },
       {
        "id": "6adb1ad6a7045b00011f3fc9",
@@ -4380,7 +4380,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 182,
+     "quantity": 178,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": 0,
@@ -4415,7 +4415,7 @@
        "name": "壽司組合 / 稻荷雙拼 $100",
        "price": 100,
        "priceLabel": "NT$100",
-       "qty": 24
+       "qty": 23
       },
       {
        "id": "6adb1ad6a7045b00011f3fa3",
@@ -4439,7 +4439,7 @@
        "name": "烏龍麵 / 什錦炒烏龍麵 $130",
        "price": 130,
        "priceLabel": "NT$130",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6adb1ad6a7045b00011f3fa7",
@@ -4447,7 +4447,7 @@
        "name": "副餐 / 茶碗蒸+味噌湯 $65",
        "price": 65,
        "priceLabel": "NT$65",
-       "qty": 20
+       "qty": 18
       }
      ]
     },
@@ -4458,7 +4458,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 349,
+     "quantity": 347,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": 0,
@@ -4541,7 +4541,7 @@
        "name": "豬油拌飯+筍子 $45",
        "price": 45,
        "priceLabel": "NT$45",
-       "qty": 50
+       "qty": 49
       },
       {
        "id": "6adb1ad60ed8420001d4ccb9",
@@ -4565,7 +4565,7 @@
        "name": "海鮮鍋燒意麵 $125",
        "price": 125,
        "priceLabel": "NT$125",
-       "qty": 9
+       "qty": 8
       },
       {
        "id": "6adb1ad60ed8420001d4ccbe",
@@ -4624,7 +4624,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 157,
+     "quantity": 153,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": 0,
@@ -4651,7 +4651,7 @@
        "name": "四季青茶 $35 / 無糖微冰",
        "price": 35,
        "priceLabel": "NT$35",
-       "qty": 5
+       "qty": 2
       },
       {
        "id": "6adb1ad20ed8420001d4cbeb",
@@ -4691,7 +4691,7 @@
        "name": "阿薩姆紅茶 $35 / 微糖微冰",
        "price": 35,
        "priceLabel": "NT$35",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6adb1ad30ed8420001d4cc1b",
@@ -5042,7 +5042,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 379,
+     "quantity": 378,
      "availableFrom": "2026-10-29T08:00:00.000Z",
      "availableUntil": "2026-10-30T01:50:00.000Z",
      "maxOrderQty": 0,
@@ -5061,7 +5061,7 @@
        "name": "燒烤雞腿排飯 $120",
        "price": 120,
        "priceLabel": "NT$120",
-       "qty": 29
+       "qty": 28
       },
       {
        "id": "6adb1ad0a7045b00011f3ebd",

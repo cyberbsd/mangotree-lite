@@ -1,0 +1,20 @@
+{
+  "name": "mangotree-lite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal wrapper around mangotree.tw for one delivery area (工業東一區): one-screen menu, favorites, reminders.",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "scrape": "node src/cli.js scrape",
+    "login": "node src/cli.js login",
+    "remind": "node src/cli.js remind",
+    "order": "node src/cli.js order"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "node-cron": "^3.0.3",
+    "playwright": "^1.49.1"
+  }
+}

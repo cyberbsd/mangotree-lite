@@ -1,0 +1,17 @@
+{
+  "base": "https://www.mangotree.tw",
+  "area": { "slug": "gongye-e-1", "name": "工業東一區" },
+  "meals": {
+    "lunch":        { "label": "午餐",       "days": ["mon", "tues", "wed", "thur", "fri"], "suffix": "lunch" },
+    "tea":          { "label": "下午茶",     "days": ["tues", "wed", "thur"],               "suffix": "afternoon-tea" },
+    "dinner-early": { "label": "晚餐早點拿", "days": ["mon", "tues", "wed", "thur", "fri"], "suffix": "dinner-early" },
+    "dinner-late":  { "label": "晚餐晚點拿", "days": ["mon", "tues", "wed", "thur", "fri"], "suffix": "dinner-late" }
+  },
+  "reminders": {
+    "meals": ["lunch"],
+    "onOpen": true,
+    "minutesBeforeClose": 45,
+    "quietIfOrdered": true
+  },
+  "scrapeEveryMinutes": 30
+}

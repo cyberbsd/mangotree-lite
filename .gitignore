@@ -4,4 +4,5 @@ profile/
 data/*
 !data/menu.json
 !data/reminders-sent.json
+!data/state.json
 site/

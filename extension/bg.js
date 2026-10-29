@@ -46,12 +46,15 @@ async function scrape() {
 }
 
 // ---------- reminders ----------
+const favKey = (s) => String(s || '').replace(/\s*\$?\s*\d+(\.\d+)?\s*$/, '').replace(/\s+/g, '').trim();
+const favHit = (slot, f) => { for (const v of slot.vendors) { if (v.id !== f.vendorId && v.name !== f.vendorName) continue; const it = (v.items || []).find((i) => i.name === f.itemName) || (v.items || []).find((i) => favKey(i.name) === favKey(f.itemName)); if (it) return { v, it }; } return null; };
 async function checkReminders() {
   const st = await settings(), menu = await get('menu'); if (!menu) return;
   const sent = await get('remindersSent', {}), orders = await get('orders', []), favs = await get('favorites', []);
   const now = Date.now(), MIN = 60000;
-  const favHint = favs.length ? `常點：${favs.slice(0, 2).map((f) => f.itemName).join('、')}` : '';
   for (const slot of Object.values(menu.slots)) {
+    const here = favs.filter((f) => favHit(slot, f));
+    const favHint = here.length ? `常點：${here.slice(0, 2).map((f) => f.itemName).join('、')}` : '';
     if (!st.remindMeals.includes(slot.meal) || !slot.window.from || !slot.window.until || !slot.date) continue;
     const from = Date.parse(slot.window.from), until = Date.parse(slot.window.until), status = MTParse.slotStatus(slot, now);
     const ordered = orders.some((o) => o.slotKey === slot.key && o.date === slot.date);
@@ -65,6 +68,14 @@ async function checkReminders() {
       notify(key + ':close', `⏰ ${slot.mealLabel} ${md}(${slot.dayZh}) 還沒訂！`, `${hhmm} 截止。${favHint}`);
       sent[key + ':close'] = now;
     }
+  }
+  // Weekly menu change (store publishes next week on Saturday).
+  const dates = Object.values(menu.slots).map((s) => s.date).filter(Boolean).sort(), weekKey = dates[dates.length - 1] || '';
+  const lastWeekKey = await get('lastWeekKey', '');
+  if (weekKey && weekKey > lastWeekKey && Object.values(menu.slots).some((s) => s.vendors.length)) {
+    const lines = favs.map((f) => { const days = Object.values(menu.slots).filter((s) => st.remindMeals.includes(s.meal) && favHit(s, f)).map((s) => `${s.date.slice(5).replace('-', '/')}(${s.dayZh})`); return days.length ? `${f.itemName}：${days.join(' ')}` : null; }).filter(Boolean);
+    if (lastWeekKey) notify('week:' + weekKey, `📅 ${MT.area.name} 新菜單（到 ${weekKey.slice(5).replace('-', '/')}）`, lines.length ? lines.join('\n') : '常點的品項這週沒出現，打開看看有什麼新的。');
+    await S.set({ lastWeekKey: weekKey });
   }
   for (const k of Object.keys(sent)) if (now - sent[k] > 14 * 24 * 60 * MIN) delete sent[k];
   await S.set({ remindersSent: sent });

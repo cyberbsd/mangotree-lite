@@ -91,3 +91,11 @@ Install: `chrome://extensions` (or `edge://extensions`) → Developer mode → *
   Send that file if the add-to-cart step misbehaves and the selectors need adjusting.
 
 Phones: Chrome on Android/iOS has no extensions, so colleagues on phones use the GitHub Pages site.
+
+## Weekly rotation
+
+MangoTree publishes the next week's vendors every Saturday, with new product IDs. Favorites are
+therefore matched by vendor **name** + dish name with the trailing price ignored, so "精緻燒肉飯 $85"
+still matches next week's "精緻燒肉飯 $90". When a new week's menu appears, the reminder job sends one
+notice listing which days your favorites are on; `data/state.json` (committed by the workflow) remembers
+the last week seen.

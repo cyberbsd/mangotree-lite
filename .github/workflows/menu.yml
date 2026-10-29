@@ -46,7 +46,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f data/menu.json data/reminders-sent.json
+          git add -f data/menu.json data/reminders-sent.json data/state.json
           git diff --cached --quiet || git commit -m "data: menu $(date -u +%FT%TZ)"
           git push
       - name: Build static site

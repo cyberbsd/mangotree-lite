@@ -93,12 +93,14 @@ function renderTabs() {
   $('#tabs').innerHTML = DATA.slots.map(s => `<div class="tab ${s === current ? 'active' : ''}" data-k="${s.key}">${s.mealLabel} ${s.date ? s.date.slice(5).replace('-', '/') : ''}(${s.dayZh})<span class="st">${STATUS[s.status]}</span></div>`).join('');
   $('#tabs').querySelectorAll('.tab').forEach(t => t.onclick = () => { current = DATA.slots.find(s => s.key === t.dataset.k); location.hash = current.key; renderTabs(); render(); });
 }
-function isFav(v, it) { return DATA.favorites.some(f => f.vendorId === v.id && f.itemName === it.name); }
+function isFav(v, it) { return DATA.favorites.some(f => (f.vendorId === v.id || f.vendorName === v.name) && favKey(f.itemName) === favKey(it.name)); }
+const favKey = (s) => String(s || '').replace(/\s*\$?\s*\d+(\.\d+)?\s*$/, '').replace(/\s+/g, '').trim();
+const favHit = (slot, f) => { for (const v of slot.vendors) { if (v.id !== f.vendorId && v.name !== f.vendorName) continue; const it = (v.items || []).find((i) => i.name === f.itemName) || (v.items || []).find((i) => favKey(i.name) === favKey(f.itemName)); if (it) return { v, it }; } return null; };
 function render() {
   const s = current; if (!s) return;
   const w = s.window;
   let html = `<div class="banner ${s.status}">${s.mealLabel} ${s.date || ''}（${s.dayZh}）· ${STATUS[s.status]}　開放 ${fmt(w.from)} → 截止 ${fmt(w.until)}</div>`;
-  const favs = DATA.favorites.map(f => { const v = s.vendors.find(v => v.id === f.vendorId || v.name === f.vendorName); const it = v && v.items.find(i => i.name === f.itemName); return it ? { v, it } : null; }).filter(Boolean);
+  const favs = DATA.favorites.map((f) => favHit(s, f)).filter(Boolean);
   if (favs.length) html += `<div class="card fav"><div class="vendor">⭐ 常點（一鍵再來）</div><div class="items" style="display:block">${favs.map(({ v, it }) => itemRow(v, it, true)).join('')}</div></div>`;
   html += s.vendors.map(v => `<div class="card" data-v="${v.id}"><div class="vendor"><span>${v.name} <small>${v.priceRange || ''}${v.quantity != null ? ' · 剩 ' + v.quantity : ''}</small></span><span>${v.items.length} 項 ▾</span></div><div class="items">${v.items.map(it => itemRow(v, it)).join('') || '<div class="sub">（無法讀取品項）</div>'}</div></div>`).join('');
   if (DATA.orders.length) html += `<div class="card"><div class="vendor">最近訂單</div>${DATA.orders.slice(0, 8).map(o => `<div class="sub">${fmt(o.at)} · ${o.date || ''} ${o.itemName || ''} ×${o.qty || 1} ${o.submitted ? '✅' : '⏳未確認'}</div>`).join('')}</div>`;

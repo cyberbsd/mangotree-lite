@@ -8,7 +8,7 @@ export function parseCategory(html) {
   const title = decode((html.match(/<title>([^<]*)<\/title>/) || [])[1] || '').trim();
   const dm = title.match(/(\d{1,2})\/(\d{1,2})\(([一二三四五六日])\)/);
   const vendors = [];
-  const re = /<a class="Product-item[^"]*" href="([^"]+)" product-id="([a-f0-9]{24})"[\s\S]*?<div class="Label-title[^"]*">([^<]*)<\/div>\s*(?:<div class="[^"]*Label-price[^"]*">([^<]*)<\/div>)?/g;
+  const re = /<a class="Product-item[^"]*"\s+href="([^"]+)"\s+product-id="([a-f0-9]{24})"[\s\S]*?<div class="Label-title[^"]*">([^<]*)<\/div>\s*(?:<div class="[^"]*Label-price[^"]*">([^<]*)<\/div>)?/g;
   let m;
   while ((m = re.exec(html))) {
     const card = m[0];

@@ -68,3 +68,26 @@ node src/cli.js order --url <vendor product url> --item "精緻燒肉飯 $85" --
   visible window; the session cookie then lives in `./profile`.
 * Checkout selectors in `src/order.js` for the final submit button are best-effort (the checkout page
   needs a login to inspect). Run one order with **記錄 API** and adjust if needed.
+
+## Chrome / Edge extension (one-click order)
+
+`extension/` is a Manifest V3 extension that does the whole thing inside your own logged-in browser:
+no stored password, no captcha, no Playwright.
+
+Install: `chrome://extensions` (or `edge://extensions`) → Developer mode → **Load unpacked** → pick the
+`extension` folder. Pin the 🥭 icon.
+
+* **Popup**: same one-screen menu (tabs per meal/date, vendors → dishes with stock, ⭐ favorites).
+  First open scrapes the menu itself (≈1 min); afterwards every 30 min via `chrome.alarms`.
+  In ⚙ settings you can instead point it at the GitHub Pages `menu.json` to skip self-scraping.
+* **訂** opens the vendor page with a marker, and the content script drives SHOPLINE's own AngularJS
+  controller (`variationName[i]` → `onVariationChanged(i)` → `addItemQuantity` → `addItemToCart()`),
+  then goes to `/checkout`, fills the 注意事項 textarea with your note and ticks any agreement box.
+  By default it stops there; you press the final button. Enable **自動按最後的送出按鈕** once you've
+  seen the flow work.
+* **Reminders** are Chrome notifications (works while the browser is running): on window open and
+  N minutes before cutoff, silenced once an order for that slot is recorded.
+* **記錄官網 API 呼叫** logs the storefront's XHR/fetch calls; **匯出紀錄** downloads them as JSON.
+  Send that file if the add-to-cart step misbehaves and the selectors need adjusting.
+
+Phones: Chrome on Android/iOS has no extensions, so colleagues on phones use the GitHub Pages site.

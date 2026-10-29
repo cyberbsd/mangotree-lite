@@ -62,6 +62,7 @@ jobs:
   deploy:
     needs: scrape
     runs-on: ubuntu-latest
+    continue-on-error: true   # Pages not enabled yet → scrape/commit still count as success
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

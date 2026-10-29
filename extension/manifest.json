@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "MangoTree Lite 工業東一區",
+  "version": "0.1.0",
+  "description": "One-click lunch orders on mangotree.tw for 工業東一區: compact menu, favorites, reminders.",
+  "permissions": ["storage", "alarms", "notifications", "tabs"],
+  "host_permissions": ["https://www.mangotree.tw/*", "https://*.github.io/*"],
+  "background": { "service_worker": "bg.js" },
+  "action": { "default_popup": "popup.html", "default_title": "MangoTree Lite", "default_icon": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" } },
+  "icons": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "options_ui": { "page": "options.html", "open_in_tab": false },
+  "content_scripts": [
+    { "matches": ["https://www.mangotree.tw/products/*", "https://www.mangotree.tw/checkout*", "https://www.mangotree.tw/cart*"], "js": ["content-main.js"], "world": "MAIN", "run_at": "document_start" },
+    { "matches": ["https://www.mangotree.tw/products/*", "https://www.mangotree.tw/checkout*", "https://www.mangotree.tw/cart*"], "js": ["content.js"], "run_at": "document_idle" }
+  ]
+}

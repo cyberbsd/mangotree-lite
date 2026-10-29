@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>MangoTree Lite</title>
+<style>
+  :root { --bg:#fafaf7; --fg:#1d1d1b; --muted:#6b6b66; --card:#fff; --line:#e6e4dc; --accent:#d9913c; --chip:#f1efe8; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#141412; --fg:#ecebe6; --muted:#9a9890; --card:#1e1e1b; --line:#2e2d29; --chip:#2a2a26; } }
+  * { box-sizing:border-box } body { width:400px; max-height:580px; overflow:auto; margin:0; background:var(--bg); color:var(--fg); font:14px/1.4 system-ui,-apple-system,"Noto Sans TC",sans-serif; padding:0 12px 12px }
+  header { position:sticky; top:0; background:var(--bg); padding:10px 0 6px; border-bottom:1px solid var(--line); z-index:2 }
+  h1 { font-size:16px; margin:0; display:flex; justify-content:space-between; align-items:center }
+  h1 small { font-weight:400; color:var(--muted); font-size:12px }
+  .sub { color:var(--muted); font-size:12px; margin-top:2px }
+  .tabs { display:flex; gap:6px; overflow-x:auto; padding:6px 0 }
+  .tab { white-space:nowrap; padding:4px 10px; border-radius:999px; background:var(--chip); border:1px solid var(--line); cursor:pointer; font-size:12px }
+  .tab.active { background:var(--accent); color:#fff; border-color:var(--accent) }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:8px 10px; margin:8px 0 }
+  .vendor { font-weight:600; display:flex; justify-content:space-between; cursor:pointer } .vendor small { color:var(--muted); font-weight:400 }
+  .items { display:none; margin-top:6px } .card.open .items, .card.fav .items { display:block }
+  .item { display:flex; align-items:center; gap:6px; padding:6px 0; border-top:1px solid var(--line) } .item .n { flex:1 } .item .p { color:var(--muted); min-width:50px; text-align:right } .q { color:var(--muted); font-size:11px }
+  button { font:inherit; border:1px solid var(--line); background:var(--chip); color:var(--fg); border-radius:7px; padding:4px 9px; cursor:pointer }
+  button.primary { background:var(--accent); color:#fff; border-color:var(--accent) } button:disabled { opacity:.45; cursor:default }
+  button.star { border:none; background:none; font-size:16px; padding:0 4px } button.sm { font-size:12px; padding:2px 7px }
+  .banner { padding:7px 10px; border-radius:8px; margin:8px 0; font-size:12px }
+  .banner.open { background:#e6f4ea; color:#1e6b3a } .banner.closed { background:#fdecea; color:#8a2b22 } .banner.upcoming { background:#fff4e0; color:#7a4b00 } .banner.unknown { background:var(--chip); color:var(--muted) }
+  .empty { color:var(--muted); padding:20px; text-align:center }
+  .log { font:11px/1.4 ui-monospace,monospace; white-space:pre-wrap; color:var(--muted) }
+</style>
+</head>
+<body>
+<header>
+  <h1>🥭 工業東一區 <small><button class="sm" id="refresh" title="重新抓菜單">↻</button> <button class="sm" id="opts" title="設定">⚙</button></small></h1>
+  <div class="sub" id="meta">載入中…</div>
+  <div class="tabs" id="tabs"></div>
+</header>
+<main id="main"><div class="empty">載入中…</div></main>
+<script src="config.js"></script>
+<script src="parse.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

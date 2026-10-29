@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><title>MangoTree Lite 設定</title>
+<style>
+  body { font:14px/1.5 system-ui,sans-serif; padding:14px; width:380px; color:#1d1d1b; background:#fafaf7 }
+  @media (prefers-color-scheme: dark) { body { color:#ecebe6; background:#141412 } input, textarea { background:#1e1e1b; color:#ecebe6; border-color:#2e2d29 } }
+  label { display:block; margin:10px 0 4px; font-weight:600 } .row label { display:inline; font-weight:400; margin-right:10px }
+  input[type=text], input[type=number], input[type=url], textarea { width:100%; font:inherit; padding:5px; border:1px solid #ccc; border-radius:6px }
+  small { color:#777 } button { font:inherit; padding:6px 12px; border-radius:7px; border:1px solid #ccc; background:#d9913c; color:#fff; cursor:pointer } #msg { margin-left:8px; color:#2e8b57 }
+</style></head>
+<body>
+<h3 style="margin:0 0 6px">🥭 MangoTree Lite 設定</h3>
+<label>要抓的餐別</label>
+<div class="row" id="scrapeMeals"></div>
+<label>菜單來源 <small>（留空＝擴充功能自己抓；或填 GitHub Pages 的 menu.json 網址，省流量）</small></label>
+<input type="url" id="menuUrl" placeholder="https://cyberbsd.github.io/mangotree-lite/menu.json">
+<label>重抓間隔（分鐘）</label><input type="number" id="scrapeEveryMin" min="10" max="240">
+<label>提醒餐別</label>
+<div class="row" id="remindMeals"></div>
+<div class="row" style="margin-top:8px"><label><input type="checkbox" id="remindOnOpen"> 開放訂餐時提醒</label></div>
+<label>截止前幾分鐘提醒</label><input type="number" id="minutesBeforeClose" min="5" max="240">
+<label>下單</label>
+<div class="row"><label><input type="checkbox" id="autoSubmit"> 自動按最後的送出按鈕 <small>（第一次先不要勾，確認流程沒問題再開）</small></label></div>
+<div class="row"><label><input type="checkbox" id="recordNet"> 記錄官網 API 呼叫（除錯用）</label> <button id="dump" type="button" style="background:#888">匯出紀錄</button></div>
+<label>結帳備註（注意事項欄）</label><textarea id="note" rows="2"></textarea>
+<p><button id="save">儲存</button><span id="msg"></span></p>
+<script src="config.js"></script>
+<script src="options.js"></script>
+</body></html>

@@ -3,6 +3,9 @@
 name: menu
 
 on:
+  push:
+    branches: [main]
+    paths-ignore: ['data/**']
   schedule:
     # Every 30 min, 06:00–23:30 Taiwan time (UTC+8), all days (the store only has weekday menus; idle runs are cheap).
     - cron: '0,30 22-23 * * *'

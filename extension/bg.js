@@ -45,6 +45,41 @@ async function scrape() {
   return menu;
 }
 
+/** Re-fetch one vendor's product page and update its items/stock in the stored menu. */
+async function refreshVendor(slotKey, vendorId) {
+  const menu = await get('menu'); const slot = menu?.slots?.[slotKey]; if (!slot) throw new Error('no slot');
+  const i = slot.vendors.findIndex((v) => v.id === vendorId); if (i < 0) throw new Error('no vendor');
+  const p = MTParse.parseProduct(await fetchHtml(slot.vendors[i].url));
+  slot.vendors[i] = { ...slot.vendors[i], ...p, url: slot.vendors[i].url, refreshedAt: new Date().toISOString() };
+  await S.set({ menu }); return slot.vendors[i];
+}
+/** Re-fetch a whole slot (category + every vendor). */
+async function refreshSlot(slotKey) {
+  const menu = await get('menu'); const slot = menu?.slots?.[slotKey]; if (!slot) throw new Error('no slot');
+  const cat = MTParse.parseCategory(await fetchHtml(slot.url));
+  const vendors = [];
+  for (const v of cat.vendors) {
+    try { const p = MTParse.parseProduct(await fetchHtml(v.url)); vendors.push({ ...v, ...p, url: v.url, refreshedAt: new Date().toISOString() }); }
+    catch (e) { vendors.push({ ...v, items: [], error: e.message }); }
+  }
+  slot.vendors = vendors; slot.refreshedAt = new Date().toISOString();
+  await S.set({ menu }); return slot;
+}
+/** Live stock check for basket lines: returns { soldOut:[names], low:[{name, left}] }. */
+async function checkStock(items) {
+  const byUrl = new Map();
+  for (const l of items) { const u = l.vendorUrl.split('?')[0]; if (!byUrl.has(u)) byUrl.set(u, MTParse.parseProduct(await fetchHtml(u))); }
+  const favKey = (s) => String(s || '').replace(/\s*\$?\s*\d+(\.\d+)?\s*$/, '').replace(/\s+/g, '').trim();
+  const soldOut = [], low = [];
+  for (const l of items) {
+    const p = byUrl.get(l.vendorUrl.split('?')[0]);
+    const it = p.items.find((i) => i.name === l.itemName) || p.items.find((i) => favKey(i.name) === favKey(l.itemName));
+    if (!it || it.qty === 0 || p.soldOut) soldOut.push(l.itemName);
+    else if (it.qty != null && it.qty < (l.qty || 1)) low.push({ name: l.itemName, left: it.qty });
+  }
+  return { soldOut, low };
+}
+
 // ---------- reminders ----------
 const favKey = (s) => String(s || '').replace(/\s*\$?\s*\d+(\.\d+)?\s*$/, '').replace(/\s+/g, '').trim();
 const favHit = (slot, f) => { for (const v of slot.vendors) { if (v.id !== f.vendorId && v.name !== f.vendorName) continue; const it = (v.items || []).find((i) => i.name === f.itemName) || (v.items || []).find((i) => favKey(i.name) === favKey(f.itemName)); if (it) return { v, it }; } return null; };
@@ -92,6 +127,9 @@ chrome.notifications.onClicked.addListener((id) => { chrome.action.openPopup?.()
 async function startOrder(o) {
   const items = (o.items || []).map((l) => ({ ...l, done: false }));
   if (!items.length) throw new Error('empty basket');
+  const stock = await checkStock(items);                       // live check right before ordering
+  if (stock.soldOut.length) throw new Error('已售完：' + stock.soldOut.join('、'));
+  if (stock.low.length) items.forEach((l) => { const w = stock.low.find((x) => x.name === l.itemName); if (w) l.qty = w.left; });
   const pending = { id: `${Date.now()}`, items, slotKey: o.slotKey, date: o.date, stage: 'add', done: 0, startedAt: Date.now(), log: [] };
   await S.set({ pending });
   const url = items[0].vendorUrl + (items[0].vendorUrl.includes('?') ? '&' : '?') + 'mtl=' + pending.id;
@@ -103,6 +141,9 @@ async function startOrder(o) {
 chrome.runtime.onMessage.addListener((msg, sender, reply) => {
   (async () => {
     if (msg.type === 'scrape') reply(await scrape());
+    else if (msg.type === 'refreshVendor') reply(await refreshVendor(msg.slotKey, msg.vendorId));
+    else if (msg.type === 'refreshSlot') reply(await refreshSlot(msg.slotKey));
+    else if (msg.type === 'checkStock') reply(await checkStock(msg.items));
     else if (msg.type === 'order') reply(await startOrder(msg));
     else if (msg.type === 'remind') { await checkReminders(); reply(true); }
     else if (msg.type === 'ordered') {           // from content.js when checkout is done

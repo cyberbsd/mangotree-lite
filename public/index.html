@@ -33,6 +33,7 @@
   dialog textarea { width:100%; height:120px; font:13px/1.4 ui-monospace,monospace; background:var(--chip); color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:8px }
   .log { font:12px/1.4 ui-monospace,monospace; white-space:pre-wrap; color:var(--muted); max-height:160px; overflow:auto }
   .empty { color:var(--muted); padding:24px; text-align:center }
+  .card.out { opacity:.5 } .item.out { opacity:.5 } .item.out .n { text-decoration:line-through }
   body.static #dlg-go, body.static #dlg-auto, body.static #dlg-rec, body.static label:has(#dlg-auto), body.static label:has(#dlg-rec) { display:none }
 </style>
 </head>
@@ -65,6 +66,10 @@
 
 <script>
 const $ = (s) => document.querySelector(s);
+const itemOut = (v, it) => it.qty === 0 || !!v.soldOut || !!v.error;
+const vendorOut = (v) => !!v.soldOut || !!v.error || (v.items.length > 0 && v.items.every((it) => it.qty === 0));
+const sortItems = (v) => [...v.items].sort((a, b) => itemOut(v, a) - itemOut(v, b));
+const sortVendors = (vs) => [...vs].sort((a, b) => vendorOut(a) - vendorOut(b));
 let DATA = null, current = null, sel = null;
 const fmt = (iso) => iso ? new Date(iso).toLocaleString('zh-TW', { timeZone:'Asia/Taipei', month:'2-digit', day:'2-digit', weekday:'narrow', hour:'2-digit', minute:'2-digit', hour12:false }) : '?';
 const fmtT = (iso) => iso ? new Date(iso).toLocaleTimeString('zh-TW', { timeZone:'Asia/Taipei', hour:'2-digit', minute:'2-digit', hour12:false }) : '?';
@@ -102,7 +107,7 @@ function render() {
   let html = `<div class="banner ${s.status}">${s.mealLabel} ${s.date || ''}（${s.dayZh}）· ${STATUS[s.status]}　開放 ${fmt(w.from)} → 截止 ${fmt(w.until)}</div>`;
   const favs = DATA.favorites.map((f) => favHit(s, f)).filter(Boolean);
   if (favs.length) html += `<div class="card fav"><div class="vendor">⭐ 常點（一鍵再來）</div><div class="items" style="display:block">${favs.map(({ v, it }) => itemRow(v, it, true)).join('')}</div></div>`;
-  html += s.vendors.map(v => `<div class="card" data-v="${v.id}"><div class="vendor"><span>${v.name} <small>${v.priceRange || ''}${v.quantity != null ? ' · 剩 ' + v.quantity : ''}</small></span><span>${v.items.length} 項 ▾</span></div><div class="items">${v.items.map(it => itemRow(v, it)).join('') || '<div class="sub">（無法讀取品項）</div>'}</div></div>`).join('');
+  html += sortVendors(s.vendors).map(v => `<div class="card ${vendorOut(v) ? 'out' : ''}" data-v="${v.id}"><div class="vendor"><span>${v.name} <small>${vendorOut(v) ? '售完' : (v.priceRange || '') + (v.quantity != null ? ' · 剩 ' + v.quantity : '')}</small></span><span>${v.items.length} 項 ▾</span></div><div class="items">${sortItems(v).map(it => itemRow(v, it)).join('') || '<div class="sub">（無法讀取品項）</div>'}</div></div>`).join('');
   if (DATA.orders.length) html += `<div class="card"><div class="vendor">最近訂單</div>${DATA.orders.slice(0, 8).map(o => `<div class="sub">${fmt(o.at)} · ${o.date || ''} ${o.itemName || ''} ×${o.qty || 1} ${o.submitted ? '✅' : '⏳未確認'}</div>`).join('')}</div>`;
   const wasOpen = new Set([...$('#main').querySelectorAll('.card.open[data-v]')].map(c => c.dataset.v));
   $('#main').innerHTML = html;
@@ -116,8 +121,8 @@ function render() {
 }
 function itemRow(v, it, inFav = false) {
   const o = JSON.stringify({ vendorId: v.id, vendorName: v.name, vendorUrl: v.url, itemId: it.id, itemName: it.name, price: it.price });
-  const soldOut = it.qty === 0 || v.soldOut;
-  return `<div class="item"><span class="n">${inFav ? v.name + ' · ' : ''}${it.name}${soldOut ? ' <span class="q">售完</span>' : (it.qty != null ? ` <span class="q">剩${it.qty}</span>` : '')}</span><span class="p">${it.priceLabel || ''}</span><button class="star" data-fav='${o.replace(/'/g, '&#39;')}' title="常點">${isFav(v, it) ? '★' : '☆'}</button><button class="primary" ${soldOut || current.status !== 'open' ? 'disabled' : ''} data-order='${o.replace(/'/g, '&#39;')}'>訂</button></div>`;
+  const soldOut = itemOut(v, it);
+  return `<div class="item ${soldOut ? 'out' : ''}"><span class="n">${inFav ? v.name + ' · ' : ''}${it.name}${soldOut ? ' <span class="q">售完</span>' : (it.qty != null ? ` <span class="q">剩${it.qty}</span>` : '')}</span><span class="p">${it.priceLabel || ''}</span><button class="star" data-fav='${o.replace(/'/g, '&#39;')}' title="常點">${isFav(v, it) ? '★' : '☆'}</button><button class="primary" ${soldOut || current.status !== 'open' ? 'disabled' : ''} data-order='${o.replace(/'/g, '&#39;')}'>訂</button></div>`;
 }
 function openDialog(o) {
   sel = o;

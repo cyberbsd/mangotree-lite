@@ -1,5 +1,5 @@
 {
- "scrapedAt": "2026-11-05T01:53:56.839Z",
+ "scrapedAt": "2026-11-05T04:30:59.453Z",
  "area": {
   "slug": "gongye-e-1",
   "name": "工業東一區"
@@ -4340,68 +4340,6 @@
    },
    "vendors": [
     {
-     "id": "6ae4581ef9ab060001885556",
-     "url": "https://www.mangotree.tw/products/dou-lao-yeh",
-     "name": "每日豆老爺",
-     "priceRange": "",
-     "soldOut": false,
-     "status": "active",
-     "quantity": 27,
-     "availableFrom": "2026-11-04T08:00:00.000Z",
-     "availableUntil": "2026-11-05T01:50:00.000Z",
-     "maxOrderQty": -1,
-     "items": [
-      {
-       "id": "6ae458215855a7000123e769",
-       "sku": "ML005001",
-       "name": "豆漿(非基改) $20 / 有糖",
-       "price": 20,
-       "priceLabel": "NT$20",
-       "qty": 5
-      },
-      {
-       "id": "6ae458215855a7000123e76a",
-       "sku": "ML005002",
-       "name": "豆漿(非基改) $20 / 無糖",
-       "price": 20,
-       "priceLabel": "NT$20",
-       "qty": 9
-      },
-      {
-       "id": "6ae458215855a7000123e76b",
-       "sku": "ML005003",
-       "name": "黑芝麻堅果 $25 / 低糖",
-       "price": 25,
-       "priceLabel": "NT$25",
-       "qty": 0
-      },
-      {
-       "id": "6ae458215855a7000123e76c",
-       "sku": "ML005004",
-       "name": "黑芝麻豆漿 $25 / 低糖",
-       "price": 25,
-       "priceLabel": "NT$25",
-       "qty": 6
-      },
-      {
-       "id": "6ae458215855a7000123e76d",
-       "sku": "ML005005",
-       "name": "穀釀燕麥 $25 / 無加糖",
-       "price": 25,
-       "priceLabel": "NT$25",
-       "qty": 6
-      },
-      {
-       "id": "6ae458215855a7000123e76e",
-       "sku": "ML005006",
-       "name": "紅豆薏仁 $25 / 正常",
-       "price": 25,
-       "priceLabel": "NT$25",
-       "qty": 1
-      }
-     ]
-    },
-    {
      "id": "6ae4560877423a00010121aa",
      "url": "https://www.mangotree.tw/products/in-shih-li-jian-kang-tsan-he-6ae4560877423a00010121aa",
      "name": "IN食力健康餐盒",
@@ -5825,7 +5763,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 130,
+     "quantity": 200,
      "availableFrom": "2026-11-05T08:00:00.000Z",
      "availableUntil": "2026-11-06T01:50:00.000Z",
      "maxOrderQty": -1,
@@ -5836,7 +5774,7 @@
        "name": "豆漿(非基改) $20 / 有糖",
        "price": 20,
        "priceLabel": "NT$20",
-       "qty": 25
+       "qty": 35
       },
       {
        "id": "6ae45821e01e390001d056b6",
@@ -5844,7 +5782,7 @@
        "name": "豆漿(非基改) $20 / 無糖",
        "price": 20,
        "priceLabel": "NT$20",
-       "qty": 55
+       "qty": 75
       },
       {
        "id": "6ae45821e01e390001d056b7",
@@ -5852,7 +5790,7 @@
        "name": "黑芝麻堅果 $25 / 低糖",
        "price": 25,
        "priceLabel": "NT$25",
-       "qty": 15
+       "qty": 25
       },
       {
        "id": "6ae45821e01e390001d056b8",
@@ -5860,7 +5798,7 @@
        "name": "黑芝麻豆漿 $25 / 低糖",
        "price": 25,
        "priceLabel": "NT$25",
-       "qty": 15
+       "qty": 25
       },
       {
        "id": "6ae45821e01e390001d056b9",
@@ -5868,7 +5806,7 @@
        "name": "穀釀燕麥 $25 / 無加糖",
        "price": 25,
        "priceLabel": "NT$25",
-       "qty": 10
+       "qty": 20
       },
       {
        "id": "6ae45821e01e390001d056ba",
@@ -5876,7 +5814,7 @@
        "name": "紅豆薏仁 $25 / 正常",
        "price": 25,
        "priceLabel": "NT$25",
-       "qty": 10
+       "qty": 20
       }
      ]
     },
@@ -8112,6 +8050,68 @@
    },
    "vendors": [
     {
+     "id": "6ae4581ef9ab060001885556",
+     "url": "https://www.mangotree.tw/products/dou-lao-yeh",
+     "name": "每日豆老爺",
+     "priceRange": "",
+     "soldOut": false,
+     "status": "active",
+     "quantity": 32,
+     "availableFrom": "2026-11-05T02:00:00.000Z",
+     "availableUntil": "2026-11-05T05:00:00.000Z",
+     "maxOrderQty": -1,
+     "items": [
+      {
+       "id": "6ae458215855a7000123e769",
+       "sku": "MT005001",
+       "name": "豆漿(非基改) $20 / 有糖",
+       "price": 20,
+       "priceLabel": "NT$20",
+       "qty": 5
+      },
+      {
+       "id": "6ae458215855a7000123e76a",
+       "sku": "MT005002",
+       "name": "豆漿(非基改) $20 / 無糖",
+       "price": 20,
+       "priceLabel": "NT$20",
+       "qty": 7
+      },
+      {
+       "id": "6ae458215855a7000123e76b",
+       "sku": "MT005003",
+       "name": "黑芝麻堅果 $25 / 低糖",
+       "price": 25,
+       "priceLabel": "NT$25",
+       "qty": 1
+      },
+      {
+       "id": "6ae458215855a7000123e76c",
+       "sku": "MT005004",
+       "name": "黑芝麻豆漿 $25 / 低糖",
+       "price": 25,
+       "priceLabel": "NT$25",
+       "qty": 12
+      },
+      {
+       "id": "6ae458215855a7000123e76d",
+       "sku": "MT005005",
+       "name": "穀釀燕麥 $25 / 無加糖",
+       "price": 25,
+       "priceLabel": "NT$25",
+       "qty": 6
+      },
+      {
+       "id": "6ae458215855a7000123e76e",
+       "sku": "MT005006",
+       "name": "紅豆薏仁 $25 / 正常",
+       "price": 25,
+       "priceLabel": "NT$25",
+       "qty": 1
+      }
+     ]
+    },
+    {
      "id": "6abf3948a0d6ca000151f8d8",
      "url": "https://www.mangotree.tw/products/mei-rih-sian-liang-chiang-gou-6abf3948a0d6ca000151f8d8",
      "name": "每日精選副餐",
@@ -8170,7 +8170,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 18,
+     "quantity": 17,
      "availableFrom": "2026-11-05T02:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": -1,
@@ -8189,7 +8189,7 @@
        "name": "黑糖 $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 8
+       "qty": 7
       },
       {
        "id": "6ae429176afc7c000158d2b8",
@@ -8208,7 +8208,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 19,
+     "quantity": 11,
      "availableFrom": "2026-11-05T02:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": -1,
@@ -8219,7 +8219,7 @@
        "name": "提拉米蘇風味 $50 / 一包3入",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 7
+       "qty": 4
       },
       {
        "id": "6aea7d197ce9e0000821b9bf",
@@ -8227,7 +8227,7 @@
        "name": "雙重巧克力風味 $50 / 一包3入",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 8
+       "qty": 5
       },
       {
        "id": "6aea7d197ce9e0000821b9c0",
@@ -8235,7 +8235,7 @@
        "name": "草莓風味 $50 / 一包3入",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 4
+       "qty": 2
       }
      ]
     },
@@ -8268,7 +8268,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 77,
+     "quantity": 55,
      "availableFrom": "2026-11-05T02:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": -1,
@@ -8279,7 +8279,7 @@
        "name": "椒鹽花生80g $50",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 13
+       "qty": 1
       },
       {
        "id": "6ae42917cdcf9d0001e4a338",
@@ -8287,29 +8287,7 @@
        "name": "麻辣花生80g $50",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 64
-      }
-     ]
-    },
-    {
-     "id": "6adb42e5649147000125035c",
-     "url": "https://www.mangotree.tw/products/mei-rih-sian-liang-chiang-gou",
-     "name": "每日精選副餐",
-     "priceRange": "",
-     "soldOut": false,
-     "status": "active",
-     "quantity": 2,
-     "availableFrom": "2026-11-05T02:00:00.000Z",
-     "availableUntil": "2026-11-05T05:00:00.000Z",
-     "maxOrderQty": -1,
-     "items": [
-      {
-       "id": "6adb42e7a7045b000122a3dc",
-       "sku": "MT102307",
-       "name": "和秋蘿蔔糕脆脆 $99",
-       "price": 99,
-       "priceLabel": "NT$99",
-       "qty": 2
+       "qty": 54
       }
      ]
     },
@@ -8320,7 +8298,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 85,
+     "quantity": 67,
      "availableFrom": "2026-11-05T02:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": -1,
@@ -8331,7 +8309,7 @@
        "name": "維也納(奶素)-原味 $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 60
+       "qty": 52
       },
       {
        "id": "6ae429176afc7c000158d2a4",
@@ -8339,7 +8317,7 @@
        "name": "維也納-紅豆(奶素) $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 5
+       "qty": 0
       },
       {
        "id": "6ae429176afc7c000158d2a8",
@@ -8347,7 +8325,7 @@
        "name": "黑岩巧克力(奶素) $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6ae429176afc7c000158d2b2",
@@ -8355,7 +8333,7 @@
        "name": "維也納-芋泥(奶素) $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 10
+       "qty": 6
       }
      ]
     },
@@ -8366,7 +8344,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 150,
+     "quantity": 126,
      "availableFrom": "2026-11-05T02:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": 0,
@@ -8385,7 +8363,7 @@
        "name": "主食 / 貝果佐甜醬 - 藍莓 $59",
        "price": 59,
        "priceLabel": "NT$59",
-       "qty": 5
+       "qty": 3
       },
       {
        "id": "6ae310f602897000016daaa7",
@@ -8417,7 +8395,7 @@
        "name": "主食 / 甜磚壓 - 藍莓 $55",
        "price": 55,
        "priceLabel": "NT$55",
-       "qty": 5
+       "qty": 0
       },
       {
        "id": "6ae310f602897000016daab1",
@@ -8425,7 +8403,7 @@
        "name": "主食 / 甜磚壓 - 榛果可可 $55",
        "price": 55,
        "priceLabel": "NT$55",
-       "qty": 5
+       "qty": 4
       },
       {
        "id": "6ae310f702897000016daab2",
@@ -8441,7 +8419,7 @@
        "name": "主食 / 起士口袋歐姆蛋 $65",
        "price": 65,
        "priceLabel": "NT$65",
-       "qty": 5
+       "qty": 3
       },
       {
        "id": "6ae310f702897000016daab4",
@@ -8449,7 +8427,7 @@
        "name": "主食 / 鮪魚口袋歐姆蛋 $75",
        "price": 75,
        "priceLabel": "NT$75",
-       "qty": 5
+       "qty": 1
       },
       {
        "id": "6ae310f702897000016daab5",
@@ -8457,7 +8435,7 @@
        "name": "主食 / 豬肉瑪芬堡加蛋 $75",
        "price": 75,
        "priceLabel": "NT$75",
-       "qty": 5
+       "qty": 0
       },
       {
        "id": "6ae310f702897000016daab6",
@@ -8505,7 +8483,7 @@
        "name": "溫熱飲 / 精選英式奶茶 $70",
        "price": 70,
        "priceLabel": "NT$70",
-       "qty": 5
+       "qty": 3
       },
       {
        "id": "6ae310f702897000016daabc",
@@ -8545,7 +8523,7 @@
        "name": "冰飲 / 生椰美式 $75",
        "price": 75,
        "priceLabel": "NT$75",
-       "qty": 5
+       "qty": 4
       },
       {
        "id": "6ae310f702897000016daac1",
@@ -8569,7 +8547,7 @@
        "name": "冰飲 / 榛果拿鐵 $110",
        "price": 110,
        "priceLabel": "NT$110",
-       "qty": 5
+       "qty": 4
       },
       {
        "id": "6ae310f802897000016daac5",
@@ -8601,7 +8579,7 @@
        "name": "冰飲 / 泰式鮮奶茶 $65",
        "price": 65,
        "priceLabel": "NT$65",
-       "qty": 5
+       "qty": 4
       },
       {
        "id": "6ae310f802897000016daac9",
@@ -8620,7 +8598,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 35,
+     "quantity": 13,
      "availableFrom": "2026-11-05T02:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": 0,
@@ -8631,7 +8609,7 @@
        "name": "三寶麵線(大腸.蚵仔.肉羹) $65",
        "price": 65,
        "priceLabel": "NT$65",
-       "qty": 5
+       "qty": 0
       },
       {
        "id": "6ae310f614f60a0001ec5137",
@@ -8639,7 +8617,7 @@
        "name": "大腸蚵仔麵線 $55",
        "price": 55,
        "priceLabel": "NT$55",
-       "qty": 5
+       "qty": 2
       },
       {
        "id": "6ae310f614f60a0001ec5139",
@@ -8647,7 +8625,7 @@
        "name": "大腸肉羹麵線 $55",
        "price": 55,
        "priceLabel": "NT$55",
-       "qty": 5
+       "qty": 2
       },
       {
        "id": "6ae310f714f60a0001ec513c",
@@ -8655,7 +8633,7 @@
        "name": "蚵仔肉羹麵線 $55",
        "price": 55,
        "priceLabel": "NT$55",
-       "qty": 5
+       "qty": 2
       },
       {
        "id": "6ae310f714f60a0001ec513e",
@@ -8663,7 +8641,7 @@
        "name": "大腸麵線 $50",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 5
+       "qty": 3
       },
       {
        "id": "6ae310f714f60a0001ec5141",
@@ -8671,7 +8649,7 @@
        "name": "蚵仔麵線 $50",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 5
+       "qty": 0
       },
       {
        "id": "6ae310f714f60a0001ec5144",
@@ -8679,7 +8657,7 @@
        "name": "赤肉羹麵線 $50",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 5
+       "qty": 4
       }
      ]
     },
@@ -8690,7 +8668,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 195,
+     "quantity": 185,
      "availableFrom": "2026-11-05T02:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": 0,
@@ -8701,7 +8679,7 @@
        "name": "悠畝檸萌青 $65 / 無糖微冰",
        "price": 65,
        "priceLabel": "NT$65",
-       "qty": 10
+       "qty": 8
       },
       {
        "id": "6ae310f214f60a0001ec511a",
@@ -8709,7 +8687,7 @@
        "name": "悠畝檸萌青 $65 / 微糖微冰",
        "price": 65,
        "priceLabel": "NT$65",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6ae310f314f60a0001ec5120",
@@ -8741,7 +8719,7 @@
        "name": "熟成青梅 $60 / 無糖微冰",
        "price": 60,
        "priceLabel": "NT$60",
-       "qty": 10
+       "qty": 8
       },
       {
        "id": "6ae310f814f60a0001ec518b",
@@ -8757,7 +8735,7 @@
        "name": "悠畝青韻(青茶) $40 / 無糖微冰",
        "price": 40,
        "priceLabel": "NT$40",
-       "qty": 30
+       "qty": 28
       },
       {
        "id": "6ae310fa14f60a0001ec5229",
@@ -8789,7 +8767,7 @@
        "name": "LuLu紅茶牛乳 $60 / 一分糖微冰",
        "price": 60,
        "priceLabel": "NT$60",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6ae310fd14f60a0001ec52f8",
@@ -8797,7 +8775,7 @@
        "name": "LuLu紅茶牛乳 $60 / 微糖微冰",
        "price": 60,
        "priceLabel": "NT$60",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6ae310fe14f60a0001ec52fa",
@@ -8829,7 +8807,7 @@
        "name": "日暮仙草拿鐵 $70 / 微糖微冰",
        "price": 70,
        "priceLabel": "NT$70",
-       "qty": 10
+       "qty": 9
       }
      ]
     },
@@ -8840,7 +8818,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 65,
+     "quantity": 60,
      "availableFrom": "2026-11-05T02:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": 0,
@@ -8851,7 +8829,7 @@
        "name": "酥炸雞腿 $55",
        "price": 55,
        "priceLabel": "NT$55",
-       "qty": 15
+       "qty": 14
       },
       {
        "id": "6ae310f402897000016da9f5",
@@ -8867,7 +8845,7 @@
        "name": "厚實香雞排 $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 15
+       "qty": 11
       },
       {
        "id": "6ae310f402897000016da9f8",
@@ -8894,7 +8872,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 100,
+     "quantity": 84,
      "availableFrom": "2026-11-05T02:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": 0,
@@ -8905,7 +8883,7 @@
        "name": "原味嫩仙草凍 $35",
        "price": 35,
        "priceLabel": "NT$35",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6ae310fb02897000016dab8f",
@@ -8913,7 +8891,7 @@
        "name": "芋圓嫩仙草凍 $55",
        "price": 55,
        "priceLabel": "NT$55",
-       "qty": 10
+       "qty": 7
       },
       {
        "id": "6ae310fc02897000016dab90",
@@ -8921,7 +8899,7 @@
        "name": "雙芋嫩仙草凍 $75",
        "price": 75,
        "priceLabel": "NT$75",
-       "qty": 10
+       "qty": 7
       },
       {
        "id": "6ae310fc02897000016dab91",
@@ -8929,7 +8907,7 @@
        "name": "甜水芋圓豆花(常溫) $50",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 10
+       "qty": 8
       },
       {
        "id": "6ae310fc02897000016dab92",
@@ -8937,7 +8915,7 @@
        "name": "招牌1號(冰) $75",
        "price": 75,
        "priceLabel": "NT$75",
-       "qty": 10
+       "qty": 8
       },
       {
        "id": "6ae310fc02897000016dab93",
@@ -8945,7 +8923,7 @@
        "name": "蔗糖3號(冰) $75",
        "price": 75,
        "priceLabel": "NT$75",
-       "qty": 5
+       "qty": 4
       },
       {
        "id": "6ae310fc02897000016dab94",
@@ -8953,7 +8931,7 @@
        "name": "芋見幸福(冰) $89",
        "price": 89,
        "priceLabel": "NT$89",
-       "qty": 5
+       "qty": 3
       },
       {
        "id": "6ae310fc02897000016dab95",
@@ -8969,7 +8947,7 @@
        "name": "芋見幸福熱戀中(熱) $89",
        "price": 89,
        "priceLabel": "NT$89",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6ae310fc02897000016dab97",
@@ -8985,7 +8963,29 @@
        "name": "摩米紅白湯圓 $65",
        "price": 65,
        "priceLabel": "NT$65",
-       "qty": 10
+       "qty": 9
+      }
+     ]
+    },
+    {
+     "id": "6adb42e5649147000125035c",
+     "url": "https://www.mangotree.tw/products/mei-rih-sian-liang-chiang-gou",
+     "name": "每日精選副餐",
+     "priceRange": "",
+     "soldOut": false,
+     "status": "active",
+     "quantity": 0,
+     "availableFrom": "2026-11-05T02:00:00.000Z",
+     "availableUntil": "2026-11-05T05:00:00.000Z",
+     "maxOrderQty": -1,
+     "items": [
+      {
+       "id": "6adb42e7a7045b000122a3dc",
+       "sku": "MT102307",
+       "name": "和秋蘿蔔糕脆脆 $99",
+       "price": 99,
+       "priceLabel": "NT$99",
+       "qty": 0
       }
      ]
     }
@@ -10924,7 +10924,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 338,
+     "quantity": 325,
      "availableFrom": "2026-11-04T08:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": 0,
@@ -10935,7 +10935,7 @@
        "name": "珍波椰青茶 $45 / 無糖微冰",
        "price": 45,
        "priceLabel": "NT$45",
-       "qty": 15
+       "qty": 12
       },
       {
        "id": "6ae451ccbd8a8e00015c4d49",
@@ -10959,7 +10959,7 @@
        "name": "四季青茶 $35 / 微糖微冰",
        "price": 35,
        "priceLabel": "NT$35",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae451ccbd8a8e00015c4d6a",
@@ -10983,7 +10983,7 @@
        "name": "布丁奶茶 $65 / 無糖微冰",
        "price": 65,
        "priceLabel": "NT$65",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6ae451ccbd8a8e00015c4d75",
@@ -11063,7 +11063,7 @@
        "name": "阿華田拿鐵 $65 / 無糖微冰",
        "price": 65,
        "priceLabel": "NT$65",
-       "qty": 8
+       "qty": 6
       },
       {
        "id": "6ae451cdbd8a8e00015c4dc6",
@@ -11071,7 +11071,7 @@
        "name": "阿華田拿鐵 $65 / 微糖微冰",
        "price": 65,
        "priceLabel": "NT$65",
-       "qty": 10
+       "qty": 4
       },
       {
        "id": "6ae451cdbd8a8e00015c4dc7",
@@ -11130,7 +11130,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 193,
+     "quantity": 180,
      "availableFrom": "2026-11-04T08:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": 0,
@@ -11141,7 +11141,7 @@
        "name": "肉圓(2顆/盒) $55",
        "price": 55,
        "priceLabel": "NT$55",
-       "qty": 94
+       "qty": 84
       },
       {
        "id": "6ae451cabd8a8e00015c4ca0",
@@ -11157,7 +11157,7 @@
        "name": "貢丸湯(3粒) $50",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 39
+       "qty": 37
       },
       {
        "id": "6ae451cbbd8a8e00015c4ca5",
@@ -11165,7 +11165,7 @@
        "name": "骨仔肉湯 $50",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 20
+       "qty": 19
       }
      ]
     },
@@ -11176,7 +11176,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 132,
+     "quantity": 129,
      "availableFrom": "2026-11-04T08:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": 0,
@@ -11195,7 +11195,7 @@
        "name": "黑胡椒素鮪魚 $59",
        "price": 59,
        "priceLabel": "NT$59",
-       "qty": 14
+       "qty": 12
       },
       {
        "id": "6ae451caa3afbc0001af947a",
@@ -11227,7 +11227,7 @@
        "name": "素韓式泡菜 $65",
        "price": 65,
        "priceLabel": "NT$65",
-       "qty": 14
+       "qty": 13
       },
       {
        "id": "6ae451caa3afbc0001af94ae",
@@ -11262,7 +11262,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 226,
+     "quantity": 216,
      "availableFrom": "2026-11-04T08:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": 0,
@@ -11289,7 +11289,7 @@
        "name": "飯食 / 雞肉飯+荷包蛋 $75",
        "price": 75,
        "priceLabel": "NT$75",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae451cf6afc7c0001596666",
@@ -11313,7 +11313,7 @@
        "name": "飯食 / 加大雞肉飯+荷包蛋 $95",
        "price": 95,
        "priceLabel": "NT$95",
-       "qty": 5
+       "qty": 4
       },
       {
        "id": "6ae451cf6afc7c0001596669",
@@ -11345,7 +11345,7 @@
        "name": "麵食 / 香菇乾意麵 $70",
        "price": 70,
        "priceLabel": "NT$70",
-       "qty": 13
+       "qty": 14
       },
       {
        "id": "6ae451cf6afc7c000159666d",
@@ -11417,7 +11417,7 @@
        "name": "湯品 / 豬血湯 $45",
        "price": 45,
        "priceLabel": "NT$45",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6ae451d06afc7c0001596678",
@@ -11433,7 +11433,7 @@
        "name": "小菜 / 燙青菜 $40",
        "price": 40,
        "priceLabel": "NT$40",
-       "qty": 12
+       "qty": 7
       },
       {
        "id": "6ae451d06afc7c000159667b",
@@ -11449,7 +11449,7 @@
        "name": "小菜 / 海帶+豆干 $50",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6ae451d06afc7c000159667f",
@@ -11457,7 +11457,7 @@
        "name": "小菜 / 滷甜不辣+滷豆皮 $45",
        "price": 45,
        "priceLabel": "NT$45",
-       "qty": 9
+       "qty": 8
       },
       {
        "id": "6ae451d06afc7c0001596682",
@@ -11465,7 +11465,7 @@
        "name": "小菜 / 滷甜不辣+海帶+滷蛋 $45",
        "price": 45,
        "priceLabel": "NT$45",
-       "qty": 9
+       "qty": 8
       }
      ]
     },
@@ -11476,7 +11476,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 166,
+     "quantity": 158,
      "availableFrom": "2026-11-04T08:00:00.000Z",
      "availableUntil": "2026-11-05T05:00:00.000Z",
      "maxOrderQty": 0,
@@ -11487,7 +11487,7 @@
        "name": "鐵路大排飯 $100",
        "price": 100,
        "priceLabel": "NT$100",
-       "qty": 39
+       "qty": 36
       },
       {
        "id": "6ae451cdcdcf9d0001e54f41",
@@ -11495,7 +11495,7 @@
        "name": "排骨飯 $100",
        "price": 100,
        "priceLabel": "NT$100",
-       "qty": 39
+       "qty": 38
       },
       {
        "id": "6ae451cdcdcf9d0001e54f42",
@@ -11511,7 +11511,7 @@
        "name": "滷雞腿飯 $115",
        "price": 115,
        "priceLabel": "NT$115",
-       "qty": 9
+       "qty": 7
       },
       {
        "id": "6ae451cecdcf9d0001e54f45",
@@ -11527,7 +11527,7 @@
        "name": "鯖魚飯 $100",
        "price": 100,
        "priceLabel": "NT$100",
-       "qty": 20
+       "qty": 18
       },
       {
        "id": "6ae451cecdcf9d0001e54f47",
@@ -11556,6 +11556,60 @@
     "until": "2026-11-06T05:00:00.000Z"
    },
    "vendors": [
+    {
+     "id": "6aec047beee096726223f7d2",
+     "url": "https://www.mangotree.tw/products/guguchayedan-1-1-2",
+     "name": "每日精選副餐",
+     "priceRange": "",
+     "soldOut": false,
+     "status": "active",
+     "quantity": 9,
+     "availableFrom": "2026-11-05T08:00:00.000Z",
+     "availableUntil": "2026-11-06T05:00:00.000Z",
+     "maxOrderQty": -1,
+     "items": [
+      {
+       "id": "6aec047b2de172000ce084f1",
+       "sku": "ME001101",
+       "name": "原味茶葉蛋 $160",
+       "price": 160,
+       "priceLabel": "NT$160",
+       "qty": 2
+      },
+      {
+       "id": "6aec047b2de172000ce084f2",
+       "sku": "ME001103",
+       "name": "小鳥蛋茶葉蛋 $90",
+       "price": 90,
+       "priceLabel": "NT$90",
+       "qty": 1
+      },
+      {
+       "id": "6aec047b2de172000ce084f3",
+       "sku": "ME001104",
+       "name": "原味豆干 1片  $28",
+       "price": 28,
+       "priceLabel": "NT$28",
+       "qty": 3
+      },
+      {
+       "id": "6aec047b2de172000ce084f4",
+       "sku": "ME001105",
+       "name": "辣味豆干 1片  $28",
+       "price": 28,
+       "priceLabel": "NT$28",
+       "qty": 2
+      },
+      {
+       "id": "6aec047b2de172000ce084f5",
+       "sku": "ME001106",
+       "name": "鐵蛋-原味 $100",
+       "price": 100,
+       "priceLabel": "NT$100",
+       "qty": 1
+      }
+     ]
+    },
     {
      "id": "6ae4519377423a0001011ff8",
      "url": "https://www.mangotree.tw/products/jin-cha-wu-6ae4519377423a0001011ff8",
@@ -14587,7 +14641,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 15,
+     "quantity": 4,
      "availableFrom": "2026-11-05T04:00:00.000Z",
      "availableUntil": "2026-11-05T08:00:00.000Z",
      "maxOrderQty": 0,
@@ -14598,7 +14652,7 @@
        "name": "水果小確幸(2樣、圓盒) $40",
        "price": 45,
        "priceLabel": "NT$45",
-       "qty": 15
+       "qty": 4
       },
       {
        "id": "6ae45c0165ea7c0001e9dbf4",
@@ -14617,7 +14671,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 420,
+     "quantity": 411,
      "availableFrom": "2026-11-05T04:00:00.000Z",
      "availableUntil": "2026-11-05T08:00:00.000Z",
      "maxOrderQty": 0,
@@ -14644,7 +14698,7 @@
        "name": "日光金萱 $40 / 無糖微冰",
        "price": 40,
        "priceLabel": "NT$40",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae45802e01e390001d054da",
@@ -14684,7 +14738,7 @@
        "name": "荔枝Q粿果粒茶 $75 / 一分糖微冰",
        "price": 75,
        "priceLabel": "NT$75",
-       "qty": 15
+       "qty": 14
       },
       {
        "id": "6ae45802e01e390001d054e6",
@@ -14692,7 +14746,7 @@
        "name": "黃金蕎麥茶 $40 / 無糖微冰",
        "price": 40,
        "priceLabel": "NT$40",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae45802e01e390001d054e8",
@@ -14700,7 +14754,7 @@
        "name": "黃金蕎麥茶 $40 / 微糖微冰",
        "price": 40,
        "priceLabel": "NT$40",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae45803e01e390001d054f3",
@@ -14732,7 +14786,7 @@
        "name": "琥珀紅鮮奶 $70 / 一分糖微冰",
        "price": 70,
        "priceLabel": "NT$70",
-       "qty": 15
+       "qty": 14
       },
       {
        "id": "6ae45803e01e390001d054fe",
@@ -14740,7 +14794,7 @@
        "name": "冬採四季青 $40 / 無糖微冰",
        "price": 40,
        "priceLabel": "NT$40",
-       "qty": 15
+       "qty": 14
       },
       {
        "id": "6ae45803e01e390001d05500",
@@ -14748,7 +14802,7 @@
        "name": "冬採四季青 $40 / 微糖微冰",
        "price": 40,
        "priceLabel": "NT$40",
-       "qty": 15
+       "qty": 14
       },
       {
        "id": "6ae45804e01e390001d05501",
@@ -14772,7 +14826,7 @@
        "name": "冬檸冰茶 $50 / 固定甜微冰(冬瓜本身甜度)",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 15
+       "qty": 14
       },
       {
        "id": "6ae45804e01e390001d05507",
@@ -14780,7 +14834,7 @@
        "name": "蕎麥厚奶 $60 / 無糖微冰",
        "price": 60,
        "priceLabel": "NT$60",
-       "qty": 15
+       "qty": 14
       },
       {
        "id": "6ae45804e01e390001d0550f",
@@ -14839,7 +14893,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 60,
+     "quantity": 40,
      "availableFrom": "2026-11-05T04:00:00.000Z",
      "availableUntil": "2026-11-05T08:00:00.000Z",
      "maxOrderQty": 0,
@@ -14850,7 +14904,7 @@
        "name": "蒜味雞腿 $135",
        "price": 135,
        "priceLabel": "NT$135",
-       "qty": 10
+       "qty": 3
       },
       {
        "id": "6ae45805e01e390001d05517",
@@ -14858,7 +14912,7 @@
        "name": "香煎豬里肌 $135",
        "price": 135,
        "priceLabel": "NT$135",
-       "qty": 10
+       "qty": 6
       },
       {
        "id": "6ae45805e01e390001d05518",
@@ -14866,7 +14920,7 @@
        "name": "泰式打拋豬 $135",
        "price": 135,
        "priceLabel": "NT$135",
-       "qty": 10
+       "qty": 7
       },
       {
        "id": "6ae45805e01e390001d05537",
@@ -14874,7 +14928,7 @@
        "name": "和風柚子雞胸 $139",
        "price": 139,
        "priceLabel": "NT$139",
-       "qty": 10
+       "qty": 5
       },
       {
        "id": "6ae45805e01e390001d0553b",
@@ -14882,7 +14936,7 @@
        "name": "蒲燒鯛魚 $139",
        "price": 139,
        "priceLabel": "NT$139",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6ae45806e01e390001d0553d",
@@ -14901,7 +14955,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 180,
+     "quantity": 178,
      "availableFrom": "2026-11-05T04:00:00.000Z",
      "availableUntil": "2026-11-05T08:00:00.000Z",
      "maxOrderQty": 0,
@@ -14912,7 +14966,7 @@
        "name": "黃燜雞米飯 $190 / 不辣",
        "price": 190,
        "priceLabel": "NT$190",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6ae458095855a7000123e622",
@@ -15032,7 +15086,7 @@
        "name": "川香麻辣牛 $240 / 小辣",
        "price": 240,
        "priceLabel": "NT$240",
-       "qty": 10
+       "qty": 9
       },
       {
        "id": "6ae4580a5855a7000123e6b6",
@@ -15059,7 +15113,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 820,
+     "quantity": 789,
      "availableFrom": "2026-11-05T04:00:00.000Z",
      "availableUntil": "2026-11-05T08:00:00.000Z",
      "maxOrderQty": 0,
@@ -15070,7 +15124,7 @@
        "name": "炒飯 / 肉絲炒飯 $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae458035855a7000123e42f",
@@ -15078,7 +15132,7 @@
        "name": "炒飯 / 雞柳炒飯 $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae458035855a7000123e431",
@@ -15086,7 +15140,7 @@
        "name": "炒飯 / 香腸炒飯 $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 20
+       "qty": 18
       },
       {
        "id": "6ae458035855a7000123e433",
@@ -15094,7 +15148,7 @@
        "name": "炒飯 / 鳳梨蝦仁炒飯 $90",
        "price": 90,
        "priceLabel": "NT$90",
-       "qty": 20
+       "qty": 15
       },
       {
        "id": "6ae458035855a7000123e435",
@@ -15102,7 +15156,7 @@
        "name": "炒飯 / 牛肉炒飯 $90",
        "price": 90,
        "priceLabel": "NT$90",
-       "qty": 20
+       "qty": 18
       },
       {
        "id": "6ae458035855a7000123e437",
@@ -15118,7 +15172,7 @@
        "name": "炒麵 / 肉絲炒麵 $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae458035855a7000123e43b",
@@ -15142,7 +15196,7 @@
        "name": "炒麵 / 牛肉炒麵 $90",
        "price": 90,
        "priceLabel": "NT$90",
-       "qty": 20
+       "qty": 18
       },
       {
        "id": "6ae458035855a7000123e442",
@@ -15150,7 +15204,7 @@
        "name": "炒麵 / 羊肉炒麵 $90",
        "price": 90,
        "priceLabel": "NT$90",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae458035855a7000123e444",
@@ -15166,7 +15220,7 @@
        "name": "燴飯 / 雞柳燴飯 $80",
        "price": 80,
        "priceLabel": "NT$80",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae458045855a7000123e449",
@@ -15182,7 +15236,7 @@
        "name": "燴飯 / 牛肉燴飯 $90",
        "price": 90,
        "priceLabel": "NT$90",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae458045855a7000123e44e",
@@ -15254,7 +15308,7 @@
        "name": "湯 / 骨仔肉湯 $50",
        "price": 50,
        "priceLabel": "NT$50",
-       "qty": 20
+       "qty": 18
       },
       {
        "id": "6ae458055855a7000123e465",
@@ -15262,7 +15316,7 @@
        "name": "湯 / 蛋花湯 $40",
        "price": 40,
        "priceLabel": "NT$40",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae458055855a7000123e468",
@@ -15270,7 +15324,7 @@
        "name": "湯 / 青菜豆腐湯 $40",
        "price": 40,
        "priceLabel": "NT$40",
-       "qty": 20
+       "qty": 18
       },
       {
        "id": "6ae458055855a7000123e46a",
@@ -15286,7 +15340,7 @@
        "name": "湯 / 綜合湯（骨仔肉+魚羹）$60",
        "price": 60,
        "priceLabel": "NT$60",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae458055855a7000123e46f",
@@ -15302,7 +15356,7 @@
        "name": "乾 / 招牌乾麵 $55",
        "price": 55,
        "priceLabel": "NT$55",
-       "qty": 20
+       "qty": 17
       },
       {
        "id": "6ae458055855a7000123e475",
@@ -15310,7 +15364,7 @@
        "name": "乾 / 紅油抄手+麵 $85",
        "price": 85,
        "priceLabel": "NT$85",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae458055855a7000123e481",
@@ -15318,7 +15372,7 @@
        "name": "乾 / 紅油抄手 $70",
        "price": 70,
        "priceLabel": "NT$70",
-       "qty": 20
+       "qty": 19
       },
       {
        "id": "6ae458065855a7000123e4ac",
@@ -15366,7 +15420,7 @@
        "name": "小菜 / 燙青菜 $40",
        "price": 40,
        "priceLabel": "NT$40",
-       "qty": 20
+       "qty": 17
       },
       {
        "id": "6ae458065855a7000123e4c1",
@@ -15401,7 +15455,7 @@
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 205,
+     "quantity": 198,
      "availableFrom": "2026-11-05T04:00:00.000Z",
      "availableUntil": "2026-11-05T08:00:00.000Z",
      "maxOrderQty": 0,
@@ -15412,7 +15466,7 @@
        "name": "吃霸雞腿飯 $125",
        "price": 125,
        "priceLabel": "NT$125",
-       "qty": 30
+       "qty": 29
       },
       {
        "id": "6ae458045855a7000123e452",
@@ -15420,7 +15474,7 @@
        "name": "椒麻雞腿飯 $125",
        "price": 125,
        "priceLabel": "NT$125",
-       "qty": 25
+       "qty": 24
       },
       {
        "id": "6ae458045855a7000123e456",
@@ -15428,7 +15482,7 @@
        "name": "酥炸雞排飯 $120",
        "price": 120,
        "priceLabel": "NT$120",
-       "qty": 25
+       "qty": 22
       },
       {
        "id": "6ae458045855a7000123e459",
@@ -15436,7 +15490,7 @@
        "name": "香蔥油雞飯 $110",
        "price": 110,
        "priceLabel": "NT$110",
-       "qty": 25
+       "qty": 24
       },
       {
        "id": "6ae458055855a7000123e46d",
@@ -15468,7 +15522,7 @@
        "name": "土魠魚飯 $95",
        "price": 95,
        "priceLabel": "NT$95",
-       "qty": 25
+       "qty": 24
       }
      ]
     }

@@ -13,6 +13,7 @@
   .tabs { display:flex; gap:8px; overflow-x:auto; padding:8px 0 }
   .tab { white-space:nowrap; padding:6px 12px; border-radius:999px; background:var(--chip); border:1px solid var(--line); cursor:pointer; font-size:14px }
   .tab.active { background:var(--accent); color:#fff; border-color:var(--accent) }
+  .tab.expired { opacity:.5 } .tab.toggle { background:none; border-style:dashed; color:var(--muted) }
   .tab .st { font-size:11px; opacity:.8; margin-left:4px }
   .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; margin:12px 0 }
   .vendor { font-weight:600; display:flex; justify-content:space-between; align-items:center; cursor:pointer }
@@ -70,6 +71,17 @@ const itemOut = (v, it) => it.qty === 0 || !!v.soldOut || !!v.error;
 const vendorOut = (v) => !!v.soldOut || !!v.error || (v.items.length > 0 && v.items.every((it) => it.qty === 0));
 const sortItems = (v) => [...v.items].sort((a, b) => itemOut(v, a) - itemOut(v, b));
 const sortVendors = (vs) => [...vs].sort((a, b) => vendorOut(a) - vendorOut(b));
+// Slots are listed in the order they close. Expired ones (cutoff passed, or a past date with no window) are hidden.
+const todayTW = () => new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Taipei' });
+const isExpired = (s) => s.status === 'closed' || (s.status === 'unknown' && (!s.date || s.date < todayTW()));
+const closeAt = (s) => (s.window.until ? Date.parse(s.window.until) : s.date ? Date.parse(s.date + 'T23:59:59+08:00') : Infinity);
+const orderSlots = (slots) => [...slots].sort((a, b) => closeAt(a) - closeAt(b) || a.meal.localeCompare(b.meal));
+/** The slot to act on next: the open one that closes soonest, else the one that opens soonest. */
+const pickSlot = (slots) => {
+  const live = orderSlots(slots.filter((s) => !isExpired(s)));
+  return live.find((s) => s.status === 'open') || live.filter((s) => s.status === 'upcoming').sort((a, b) => Date.parse(a.window.from) - Date.parse(b.window.from))[0] || live[0] || null;
+};
+let showExpired = false;
 let DATA = null, current = null, sel = null;
 const fmt = (iso) => iso ? new Date(iso).toLocaleString('zh-TW', { timeZone:'Asia/Taipei', month:'2-digit', day:'2-digit', weekday:'narrow', hour:'2-digit', minute:'2-digit', hour12:false }) : '?';
 const fmtT = (iso) => iso ? new Date(iso).toLocaleTimeString('zh-TW', { timeZone:'Asia/Taipei', hour:'2-digit', minute:'2-digit', hour12:false }) : '?';
@@ -81,7 +93,7 @@ const LS = { get: (k, d) => { try { return JSON.parse(localStorage.getItem('mt.'
 function slotStatus(s, now = Date.now()) { const f = s.window.from && Date.parse(s.window.from), u = s.window.until && Date.parse(s.window.until); if (!f || !u) return 'unknown'; return now < f ? 'upcoming' : now <= u ? 'open' : 'closed'; }
 async function loadStatic() {
   const [menu, config] = await Promise.all([fetch('./menu.json').then(r => r.json()), fetch('./config.json').then(r => r.json()).catch(() => ({ reminders: { meals: ['lunch'], minutesBeforeClose: 60 } }))]);
-  const slots = Object.values(menu.slots).map(s => ({ ...s, status: slotStatus(s) })).sort((a, b) => (a.date || '').localeCompare(b.date || '') || a.meal.localeCompare(b.meal));
+  const slots = Object.values(menu.slots).map(s => ({ ...s, status: slotStatus(s) }));
   return { ready: true, scrapedAt: menu.scrapedAt, area: menu.area, slots, favorites: LS.get('favorites', []), orders: LS.get('orders', []).slice(-20).reverse(), config: config.reminders };
 }
 async function load() {
@@ -89,20 +101,27 @@ async function load() {
   catch { STATIC = true; DATA = await loadStatic(); document.body.classList.add('static'); }
   if (!DATA.ready) { $('#meta').textContent = '第一次抓菜單中（約 1–2 分鐘）…'; setTimeout(load, 15000); return; }
   $('#meta').textContent = `菜單更新 ${fmt(DATA.scrapedAt)} · 提醒：${DATA.config.meals.join(',')} 開放時 + 截止前 ${DATA.config.minutesBeforeClose} 分`;
-  const want = location.hash.slice(1);
-  const slots = DATA.slots;
-  current = slots.find(s => s.key === want) || slots.find(s => s.status === 'open' && s.meal === 'lunch') || slots.find(s => s.status === 'open') || slots.find(s => s.status === 'upcoming') || slots[0];
+  const slots = DATA.slots = orderSlots(DATA.slots);
+  // A #slot deep link (from a reminder) is honoured once, then dropped so a bookmark always opens on the next slot.
+  const want = current ? current.key : location.hash.slice(1);
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  const keep = slots.find(s => s.key === want);
+  current = keep && (showExpired || !isExpired(keep)) ? keep : pickSlot(slots);
   renderTabs(); render();
 }
 function renderTabs() {
-  $('#tabs').innerHTML = DATA.slots.map(s => `<div class="tab ${s === current ? 'active' : ''}" data-k="${s.key}">${s.mealLabel} ${s.date ? s.date.slice(5).replace('-', '/') : ''}(${s.dayZh})<span class="st">${STATUS[s.status]}</span></div>`).join('');
-  $('#tabs').querySelectorAll('.tab').forEach(t => t.onclick = () => { current = DATA.slots.find(s => s.key === t.dataset.k); location.hash = current.key; renderTabs(); render(); });
+  const expired = DATA.slots.filter(isExpired), shown = DATA.slots.filter(s => showExpired || !isExpired(s));
+  $('#tabs').innerHTML = shown.map(s => `<div class="tab ${s === current ? 'active' : ''} ${isExpired(s) ? 'expired' : ''}" data-k="${s.key}">${s.mealLabel} ${s.date ? s.date.slice(5).replace('-', '/') : ''}(${s.dayZh})<span class="st">${STATUS[s.status]}</span></div>`).join('')
+    + (expired.length ? `<div class="tab toggle" id="toggle-expired">${showExpired ? '隱藏已截止' : '已截止 ' + expired.length}</div>` : '');
+  $('#tabs').querySelectorAll('.tab[data-k]').forEach(t => t.onclick = () => { current = DATA.slots.find(s => s.key === t.dataset.k); renderTabs(); render(); });
+  const tg = $('#toggle-expired'); if (tg) tg.onclick = () => { showExpired = !showExpired; if (!showExpired && current && isExpired(current)) current = pickSlot(DATA.slots); renderTabs(); render(); };
+  $('#tabs .tab.active')?.scrollIntoView({ block: 'nearest', inline: 'center' });
 }
 function isFav(v, it) { return DATA.favorites.some(f => (f.vendorId === v.id || f.vendorName === v.name) && favKey(f.itemName) === favKey(it.name)); }
 const favKey = (s) => String(s || '').replace(/\s*\$?\s*\d+(\.\d+)?\s*$/, '').replace(/\s+/g, '').trim();
 const favHit = (slot, f) => { for (const v of slot.vendors) { if (v.id !== f.vendorId && v.name !== f.vendorName) continue; const it = (v.items || []).find((i) => i.name === f.itemName) || (v.items || []).find((i) => favKey(i.name) === favKey(f.itemName)); if (it) return { v, it }; } return null; };
 function render() {
-  const s = current; if (!s) return;
+  const s = current; if (!s) { $('#main').innerHTML = '<div class="empty">目前沒有可訂的時段。<br>新菜單每週六公布，開放時會提醒。</div>'; return; }
   const w = s.window;
   let html = `<div class="banner ${s.status}">${s.mealLabel} ${s.date || ''}（${s.dayZh}）· ${STATUS[s.status]}　開放 ${fmt(w.from)} → 截止 ${fmt(w.until)}</div>`;
   const favs = DATA.favorites.map((f) => favHit(s, f)).filter(Boolean);
@@ -147,6 +166,7 @@ $('#dlg-go').onclick = async () => {
   if (r.ok) load();
 };
 load();
+setInterval(() => { if (!$('#dlg').open) load(); }, 60000);   // statuses move with the clock
 </script>
 </body>
 </html>

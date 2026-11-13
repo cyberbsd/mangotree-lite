@@ -107,3 +107,11 @@ every line to the mangotree.tw cart vendor by vendor, then opens checkout once. 
 whole basket under a name (e.g. 平常午餐); next week one tap on **放入籃子** refills it, and lines that are
 missing that day are flagged instead of silently dropped. The local server's `/api/order` takes the same
 `items[]` shape for the Playwright path.
+
+## Slot selection
+
+Tabs are listed in the order they close. Slots whose cutoff has passed are hidden behind an **已截止 N**
+chip (tap to show them dimmed). On open, the page and the popup select the open slot that closes
+soonest, or, if nothing is open, the one that opens next. The selection is re-evaluated every minute,
+so a slot that closes while the page is open drops out. A `#lunch:wed` deep link from a reminder is
+honoured once and then removed from the URL. Basket lines for an expired slot are discarded.

@@ -12,6 +12,17 @@ const itemOut = (v, it) => it.qty === 0 || !!v.soldOut || !!v.error;
 const vendorOut = (v) => !!v.soldOut || !!v.error || (v.items.length > 0 && v.items.every((it) => it.qty === 0));
 const sortItems = (v) => [...v.items].sort((a, b) => itemOut(v, a) - itemOut(v, b));
 const sortVendors = (vs) => [...vs].sort((a, b) => vendorOut(a) - vendorOut(b));
+// Slots are listed in the order they close. Expired ones (cutoff passed, or a past date with no window) are hidden.
+const todayTW = () => new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Taipei' });
+const isExpired = (s) => s.status === 'closed' || (s.status === 'unknown' && (!s.date || s.date < todayTW()));
+const closeAt = (s) => (s.window.until ? Date.parse(s.window.until) : s.date ? Date.parse(s.date + 'T23:59:59+08:00') : Infinity);
+const orderSlots = (slots) => [...slots].sort((a, b) => closeAt(a) - closeAt(b) || a.meal.localeCompare(b.meal));
+/** The slot to act on next: the open one that closes soonest, else the one that opens soonest. */
+const pickSlot = (slots) => {
+  const live = orderSlots(slots.filter((s) => !isExpired(s)));
+  return live.find((s) => s.status === 'open') || live.filter((s) => s.status === 'upcoming').sort((a, b) => Date.parse(a.window.from) - Date.parse(b.window.from))[0] || live[0] || null;
+};
+let showExpired = false;
 let DATA, current;
 
 async function load() {
@@ -19,16 +30,24 @@ async function load() {
   const [favorites, combos, basket, orders, pending, settings] = await Promise.all([get('favorites', []), get('combos', []), get('basket', []), get('orders', []), get('pending'), get('settings', {})]);
   if (!menu) { $('#meta').textContent = '尚無菜單，抓取中（約 1 分鐘）…'; chrome.runtime.sendMessage({ type: 'scrape' }, () => load()); return; }
   const now = Date.now();
-  const slots = Object.values(menu.slots).map((s) => ({ ...s, status: MTParse.slotStatus(s, now) })).sort((a, b) => (a.date || '').localeCompare(b.date || '') || a.meal.localeCompare(b.meal));
+  const slots = orderSlots(Object.values(menu.slots).map((s) => ({ ...s, status: MTParse.slotStatus(s, now) })));
+  // Basket lines for a slot that has expired (or belongs to last week's date) can no longer be ordered.
+  const byKey = new Map(slots.map((s) => [s.key, s]));
+  const liveBasket = basket.filter((l) => { const sl = byKey.get(l.slotKey); return sl && sl.date === l.date && !isExpired(sl); });
+  if (liveBasket.length !== basket.length) { basket.length = 0; basket.push(...liveBasket); await S.set({ basket }); }
   DATA = { slots, favorites, combos, basket, orders: orders.slice(-10).reverse(), pending, settings: { ...MT.defaults, ...settings }, scrapedAt: menu.scrapedAt };
   $('#meta').textContent = `菜單 ${fmt(menu.scrapedAt)} · 提醒 ${DATA.settings.remindMeals.join(',')} · 截止前 ${DATA.settings.minutesBeforeClose} 分${DATA.settings.autoSubmit ? ' · 自動送出' : ''}`;
   const keep = current && slots.find((s) => s.key === current.key);
-  current = keep || slots.find((s) => s.status === 'open' && s.meal === 'lunch') || slots.find((s) => s.status === 'open') || slots.find((s) => s.status === 'upcoming') || slots[0];
+  current = keep && (showExpired || !isExpired(keep)) ? keep : pickSlot(slots);
   renderTabs(); render(); renderBasket();
 }
 function renderTabs() {
-  $('#tabs').innerHTML = DATA.slots.map((s) => `<div class="tab ${s === current ? 'active' : ''}" data-k="${s.key}">${s.mealLabel} ${s.date ? s.date.slice(5).replace('-', '/') : ''}(${s.dayZh}) ${STATUS[s.status]}</div>`).join('');
-  $('#tabs').querySelectorAll('.tab').forEach((t) => (t.onclick = () => { current = DATA.slots.find((s) => s.key === t.dataset.k); renderTabs(); render(); }));
+  const expired = DATA.slots.filter(isExpired), shown = DATA.slots.filter((s) => showExpired || !isExpired(s));
+  $('#tabs').innerHTML = shown.map((s) => `<div class="tab ${s === current ? 'active' : ''} ${isExpired(s) ? 'expired' : ''}" data-k="${s.key}">${s.mealLabel} ${s.date ? s.date.slice(5).replace('-', '/') : ''}(${s.dayZh}) ${STATUS[s.status]}</div>`).join('')
+    + (expired.length ? `<div class="tab toggle" id="toggle-expired">${showExpired ? '隱藏已截止' : '已截止 ' + expired.length}</div>` : '');
+  $('#tabs').querySelectorAll('.tab[data-k]').forEach((t) => (t.onclick = () => { current = DATA.slots.find((s) => s.key === t.dataset.k); renderTabs(); render(); }));
+  const tg = $('#toggle-expired'); if (tg) tg.onclick = () => { showExpired = !showExpired; if (!showExpired && current && isExpired(current)) current = pickSlot(DATA.slots); renderTabs(); render(); };
+  $('#tabs .tab.active')?.scrollIntoView({ block: 'nearest', inline: 'center' });
 }
 const isFav = (v, it) => DATA.favorites.some((f) => same(f, lineOf(v, it)));
 const inBasket = (v, it) => DATA.basket.find((b) => same(b, lineOf(v, it)));
@@ -40,7 +59,7 @@ function itemRow(v, it, inFav) {
   return `<div class="item ${soldOut ? 'out' : ''}"><span class="n">${inFav ? v.name + ' · ' : ''}${it.name} <span class="q">${soldOut ? '售完' : it.qty != null ? '剩' + it.qty : ''}</span></span><span class="p">${it.priceLabel || ''}</span><button class="star" data-fav="${enc(line)}">${isFav(v, it) ? '★' : '☆'}</button>${b ? `<button class="sm" data-dec="${enc(line)}">−</button><b>${b.qty}</b>` : ''}<button class="primary sm" data-add="${enc(line)}" ${can ? '' : 'disabled'}>＋</button></div>`;
 }
 function render() {
-  const s = current; if (!s) { $('#main').innerHTML = '<div class="empty">沒有菜單資料</div>'; return; }
+  const s = current; if (!s) { $('#main').innerHTML = '<div class="empty">目前沒有可訂的時段。<br>新菜單每週六公布，開放時會提醒。</div>'; return; }
   const fresh = s.refreshedAt || s.vendors.map((v) => v.refreshedAt).filter(Boolean).sort().pop();
   let html = `<div class="banner ${s.status}">${s.mealLabel} ${s.date || ''}（${s.dayZh}）${STATUS[s.status]} · ${fmt(s.window.from)} → ${fmt(s.window.until)}<br><span class="q">庫存更新 ${fresh ? fmt(fresh) : fmt(DATA.scrapedAt)}</span> <button class="sm" id="refresh-slot" title="重抓這一天的所有店家">↻ 本日</button></div>`;
   if (DATA.pending) html += `<div class="banner upcoming">下單進行中（${DATA.pending.stage}，${DATA.pending.done || 0}/${DATA.pending.items.length}）<button class="sm" id="cancel">取消</button><div class="log">${(DATA.pending.log || []).slice(-3).join('\n')}</div></div>`;
@@ -102,4 +121,5 @@ $('#save-combo').onclick = async () => { const name = prompt('組合名稱', '�
 $('#refresh').onclick = () => { $('#meta').textContent = '抓取中…'; chrome.runtime.sendMessage({ type: 'scrape' }, () => load()); };
 $('#opts').onclick = () => chrome.runtime.openOptionsPage();
 chrome.storage.onChanged.addListener((c) => { if (c.menu || c.pending || c.orders) load(); });
+setInterval(load, 60000);   // statuses move with the clock: a slot that just closed drops out, the next one is selected
 load();

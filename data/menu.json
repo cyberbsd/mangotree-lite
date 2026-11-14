@@ -1,5 +1,5 @@
 {
- "scrapedAt": "2026-11-14T01:54:15.434Z",
+ "scrapedAt": "2026-11-14T04:21:30.200Z",
  "area": {
   "slug": "gongye-e-1",
   "name": "工業東一區"
@@ -5716,37 +5716,29 @@
    "category": "gongye-e-1-wed-afternoon-tea",
    "url": "https://www.mangotree.tw/categories/gongye-e-1-wed-afternoon-tea",
    "window": {
-    "from": "2026-11-17T02:00:00.000Z",
+    "from": "2026-11-18T02:00:00.000Z",
     "until": "2026-11-18T05:00:00.000Z"
    },
    "vendors": [
     {
-     "id": "6af6b4f2158b730001fafafb",
+     "id": "6af6b4f2158b730001fafaff",
      "url": "https://www.mangotree.tw/products/mei-rih-sian-liang-chiang-gou",
      "name": "每日精選副餐",
      "priceRange": "",
      "soldOut": false,
      "status": "active",
-     "quantity": 84,
-     "availableFrom": "2026-11-17T02:00:00.000Z",
-     "availableUntil": "2026-11-17T05:00:00.000Z",
+     "quantity": 110,
+     "availableFrom": "2026-11-18T02:00:00.000Z",
+     "availableUntil": "2026-11-18T05:00:00.000Z",
      "maxOrderQty": -1,
      "items": [
       {
-       "id": "6af6b4f304c00e0001c1bda7",
-       "sku": "MT111301",
-       "name": "杜拜巧克力Q餅 $140",
-       "price": 140,
-       "priceLabel": "NT$140",
-       "qty": 64
-      },
-      {
-       "id": "6af6b4f304c00e0001c1bda8",
-       "sku": "MT111302",
-       "name": "貓掌綠豆冰糕 $40",
-       "price": 40,
-       "priceLabel": "NT$40",
-       "qty": 20
+       "id": "6af6b4f3187b90000134aa51",
+       "sku": "MT111305",
+       "name": "札幌烤餅 $55",
+       "price": 55,
+       "priceLabel": "NT$55",
+       "qty": 110
       }
      ]
     },
